@@ -23,7 +23,9 @@ public class Viewing extends AppCompatActivity {
                         case R.id.dispatchedorders:
                             selectedFragment = new DispatchedOrders();
                             break;
-
+                        case R.id.pendingorders:
+                            selectedFragment = new PendingOrders();
+                            break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
                             selectedFragment).commit();

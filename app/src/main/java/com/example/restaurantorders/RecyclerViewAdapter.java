@@ -3,6 +3,7 @@ package com.example.restaurantorders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.orderdate.setText(orderss.get(position).getCreated_at());
         final String id = "#" + orderss.get(position).getId();
         String owner = "by " + orderss.get(position).getName();
+        if (orderss.get(position).getDispatch_status() == 0) {
+            holder.orderstatus.setTextColor(Color.GREEN);
+        } else {
+            holder.orderstatus.setText("Dispatched");
+            holder.orderstatus.setTextColor(Color.RED);
+        }
         holder.orderid.setText(id);
         holder.orderowner.setText(owner);
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -67,11 +74,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView orderid;
         TextView orderdate;
-        TextView orderowner;
+        TextView orderowner, orderstatus;
         LinearLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            orderstatus = itemView.findViewById(R.id.orderstatus);
             orderdate = itemView.findViewById(R.id.orderdate);
             orderid = itemView.findViewById(R.id.orderid);
             orderowner = itemView.findViewById(R.id.orderowner);

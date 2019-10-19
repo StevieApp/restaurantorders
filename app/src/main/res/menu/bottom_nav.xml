@@ -8,6 +8,12 @@
         android:id="@+id/allorders"
         android:icon="@drawable/ic_orders_24dp"
         android:title="@string/orders" />
+
+    <item
+        android:id="@+id/pendingorders"
+        android:icon="@drawable/ic_queue_black_24dp"
+        android:title="@string/pendingorders" />
+
     <item
         android:id="@+id/dispatchedorders"
         android:icon="@drawable/ic_dispatched_24dp"
