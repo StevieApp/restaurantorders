@@ -60,6 +60,52 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Toast.makeText(mContext, id, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(mContext, SpecificOrder.class);
                 intent.putExtra("text", id);
+                intent.putExtra("ownername", orderss.get(position).getName());
+                String dispatchstatus;
+                if (orderss.get(position).getDispatch_status() == 0) {
+                    dispatchstatus = "Pending";
+                } else {
+                    dispatchstatus = "Dispatched";
+                }
+                intent.putExtra("dispatchstatus", dispatchstatus);
+                String number = "+" + orderss.get(position).getCountry_code()
+                        + orderss.get(position).getMobile();
+                intent.putExtra("ownernumber", number);
+                intent.putExtra("textownermail", orderss.get(position).getEmail());
+                intent.putExtra("textcreateddate", orderss.get(position).getCreated_at());
+                intent.putExtra("textcountry", orderss.get(position).getDelivery_country());
+                intent.putExtra("textdeliveryplace", orderss.get(position).getDelivery_address());
+                intent.putExtra("textdeliverynumber",
+                        String.valueOf(orderss.get(position).getDelivery_contact_phone_number()));
+                intent.putExtra("textdeliverycharges",
+                        String.valueOf(orderss.get(position).getDelivery_charge()));
+                intent.putExtra("textpaytype", orderss.get(position).getPayment_details_type());
+                intent.putExtra("textpayamt",
+                        String.valueOf(orderss.get(position).getPayment_details_amount()));
+                intent.putExtra("textpayableamt",
+                        String.valueOf(orderss.get(position).getTotal()));
+                intent.putExtra("textpaystatus", orderss.get(position).getPayment_details_status());
+                if (orderss.get(position).getPayment_details_reference() == null ||
+                        orderss.get(position).getPayment_details_reference().equals("")) {
+                    intent.putExtra("textpayref", "N/A");
+                } else {
+                    intent.putExtra("textpayref", orderss.get(position).getPayment_details_reference());
+                }
+                if (orderss.get(position).getPayment_details_phone_number() == null ||
+                        orderss.get(position).getPayment_details_phone_number().equals("")) {
+                    intent.putExtra("textpayno", "N/A");
+                } else {
+                    intent.putExtra("textpayno",
+                            String.valueOf(orderss.get(position).getPayment_details_phone_number()));
+                }
+                String dispatchtime;
+                if (orderss.get(position).getDispatch_time() == null ||
+                        orderss.get(position).getDispatch_time().equals("")) {
+                    dispatchtime = "Pending dispatch/Dispatch time not set";
+                } else {
+                    dispatchtime = orderss.get(position).getDispatch_time();
+                }
+                intent.putExtra("textdispatchdate", dispatchtime);
                 mContext.startActivity(intent);
             }
         });
