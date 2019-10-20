@@ -35,24 +35,18 @@ public class Viewing extends AppCompatActivity {
             Fragment frgg;
             final FragmentTransaction ftt;
             if (bottom_nav.getSelectedItemId() == R.id.allorders) {
-                frgg = getSupportFragmentManager()
-                        .findFragmentById(R.id.fragment_area);
                 ftt = getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_area, new Orders());
                 ftt.commit();
                 Log.d(TAG, "INTERNET CONNECTEDedededdd");
             } else if (bottom_nav.getSelectedItemId() == R.id.dispatchedorders) {
-                frgg = getSupportFragmentManager()
-                        .findFragmentById(R.id.fragment_area);
                 ftt = getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_area, new DispatchedOrders());
                 ftt.commit();
                 Log.d(TAG, "INTERNET CONNECTEDedededdd");
             } else if (bottom_nav.getSelectedItemId() == R.id.pendingorders) {
-                frgg = getSupportFragmentManager()
-                        .findFragmentById(R.id.fragment_area);
                 ftt = getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_area, new PendingOrders());
@@ -108,13 +102,28 @@ public class Viewing extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
                 new Orders()).commit();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         checkConnectivity();
+        
+        BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
+        bottom_nav.setOnNavigationItemSelectedListener(newListener);
+        if (bottom_nav.getSelectedItemId() == R.id.allorders) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
+                    new Orders()).commit();
+        } else if (bottom_nav.getSelectedItemId() == R.id.dispatchedorders) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
+                    new DispatchedOrders()).commit();
+        } else if (bottom_nav.getSelectedItemId() == R.id.pendingorders) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
+                    new PendingOrders()).commit();
+        }
     }
+
 
     @Override
     public void onPause() {
@@ -126,6 +135,11 @@ public class Viewing extends AppCompatActivity {
             monitoringConnectivity = false;
         }
         super.onPause();
+
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_area) != null) {
+            getSupportFragmentManager().findFragmentById(R.id.fragment_area)
+                    .setRetainInstance(true);
+        }
     }
 
     // Method to check network connectivity in Main Activity
