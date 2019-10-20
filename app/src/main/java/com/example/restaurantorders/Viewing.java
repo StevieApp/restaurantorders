@@ -35,22 +35,22 @@ public class Viewing extends AppCompatActivity {
             Fragment frgg;
             final FragmentTransaction ftt;
             if (bottom_nav.getSelectedItemId() == R.id.allorders) {
-                ftt = getSupportFragmentManager()
+                getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_area, new Orders());
-                ftt.commit();
+                        .replace(R.id.fragment_area, new Orders())
+                        .commitAllowingStateLoss();
                 Log.d(TAG, "INTERNET CONNECTEDedededdd");
             } else if (bottom_nav.getSelectedItemId() == R.id.dispatchedorders) {
-                ftt = getSupportFragmentManager()
+                getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_area, new DispatchedOrders());
-                ftt.commit();
+                        .replace(R.id.fragment_area, new DispatchedOrders())
+                        .commitAllowingStateLoss();
                 Log.d(TAG, "INTERNET CONNECTEDedededdd");
             } else if (bottom_nav.getSelectedItemId() == R.id.pendingorders) {
-                ftt = getSupportFragmentManager()
+                getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_area, new PendingOrders());
-                ftt.commit();
+                        .replace(R.id.fragment_area, new PendingOrders())
+                        .commitAllowingStateLoss();
                 Log.d(TAG, "INTERNET CONNECTEDedededdd");
             }
             Log.d(TAG, "INTERNET CONNECTED");
@@ -109,7 +109,7 @@ public class Viewing extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         checkConnectivity();
-        
+
         BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
         bottom_nav.setOnNavigationItemSelectedListener(newListener);
         if (bottom_nav.getSelectedItemId() == R.id.allorders) {

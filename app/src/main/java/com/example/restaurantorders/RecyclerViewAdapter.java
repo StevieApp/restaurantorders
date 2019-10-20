@@ -45,10 +45,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.orderdate.setText(orderss.get(position).getCreated_at());
         final String id = "#" + orderss.get(position).getId();
         String owner = "by " + orderss.get(position).getName();
+        String disp = "Dispatched";
         if (orderss.get(position).getDispatch_status() == 0) {
             holder.orderstatus.setTextColor(Color.GREEN);
         } else {
-            holder.orderstatus.setText("Dispatched");
+            holder.orderstatus.setText(disp);
             holder.orderstatus.setTextColor(Color.RED);
         }
         holder.orderid.setText(id);
@@ -74,22 +75,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("textownermail", orderss.get(position).getEmail());
                 intent.putExtra("textcreateddate", orderss.get(position).getCreated_at());
                 intent.putExtra("textcountry", orderss.get(position).getDelivery_country());
-                intent.putExtra("textdeliveryplace", orderss.get(position).getDelivery_address());
+                intent.putExtra("textdeliveryplace",
+                        orderss.get(position).getDelivery_address());
                 intent.putExtra("textdeliverynumber",
                         String.valueOf(orderss.get(position).getDelivery_contact_phone_number()));
                 intent.putExtra("textdeliverycharges",
                         String.valueOf(orderss.get(position).getDelivery_charge()));
-                intent.putExtra("textpaytype", orderss.get(position).getPayment_details_type());
+                intent.putExtra("textpaytype",
+                        orderss.get(position).getPayment_details_type());
                 intent.putExtra("textpayamt",
                         String.valueOf(orderss.get(position).getPayment_details_amount()));
                 intent.putExtra("textpayableamt",
                         String.valueOf(orderss.get(position).getTotal()));
-                intent.putExtra("textpaystatus", orderss.get(position).getPayment_details_status());
+                intent.putExtra("textpaystatus", orderss.get(position)
+                        .getPayment_details_status());
                 if (orderss.get(position).getPayment_details_reference() == null ||
                         orderss.get(position).getPayment_details_reference().equals("")) {
                     intent.putExtra("textpayref", "N/A");
                 } else {
-                    intent.putExtra("textpayref", orderss.get(position).getPayment_details_reference());
+                    intent.putExtra("textpayref",
+                            orderss.get(position).getPayment_details_reference());
                 }
                 if (orderss.get(position).getPayment_details_phone_number() == null ||
                         orderss.get(position).getPayment_details_phone_number().equals("")) {
@@ -118,9 +123,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView orderid;
-        TextView orderdate;
-        TextView orderowner, orderstatus;
+        TextView orderid,
+                orderdate,
+                orderowner,
+                orderstatus;
         LinearLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
