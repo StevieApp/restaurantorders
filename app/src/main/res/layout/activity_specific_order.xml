@@ -502,9 +502,4 @@
         android:text="@string/orderid"
         android:textSize="40sp" />
 
-
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
