@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Pending"
                     android:textColor="#FFF"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/ownernumber"
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/phone_no"
                     android:textColor="#FFF"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,7 +92,6 @@
                             android:id="@+id/buttondispatch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:layout_gravity="end"
                             android:layout_marginRight="15dp"
                             android:backgroundTint="@android:color/holo_green_dark"
@@ -146,17 +145,17 @@
                         android:id="@+id/textowneremail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/owneremailaddress"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textownermail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/ownermail"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -171,17 +170,17 @@
                         android:id="@+id/textcreatedate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/createdat"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textcreateddate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/createdattime"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -196,17 +195,17 @@
                         android:id="@+id/deliverycountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/deliverycountry"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textcountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/country"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -221,17 +220,17 @@
                         android:id="@+id/textdeliveryaddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/deliveredat"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textdeliveryplace"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/deliveryplace"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -247,17 +246,17 @@
                         android:id="@+id/textdeliverycontact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/deliverycontact"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textdeliverynumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/deliverynumber"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -272,17 +271,17 @@
                         android:id="@+id/textdeliverycharge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/delivery_charge"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textdeliverycharges"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/deliverycharge"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -297,17 +296,17 @@
                         android:id="@+id/textpaymenttype"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/paymenttype"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textpaytype"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/paytype"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -322,17 +321,17 @@
                         android:id="@+id/textpaymentamt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/paidamount"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textpayamt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/amount"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -347,17 +346,17 @@
                         android:id="@+id/textpayableamount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/payableamount"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textpayableamt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/payableamt"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -372,17 +371,17 @@
                         android:id="@+id/textpay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/paymentstatus"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textpaystatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/paidstatus"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -397,17 +396,17 @@
                         android:id="@+id/dispatchedstatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/dispatch_status"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textdispatchstatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/dispatchstatus"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -422,17 +421,17 @@
                         android:id="@+id/textpayreference"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/payment_reference"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textpayref"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/payref"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -447,17 +446,17 @@
                         android:id="@+id/textpaynum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/payment_number"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textpayno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/pay_no"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -472,17 +471,47 @@
                         android:id="@+id/textdispatch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".6"
                         android:text="@string/dispatch_date"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textdispatchdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".5"
+                        android:layout_weight=".4"
                         android:text="@string/dispatch_time"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textcart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:text="@string/cart"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerviews"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </LinearLayout>
 
                 </LinearLayout>
 

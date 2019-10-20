@@ -1,5 +1,7 @@
 package com.example.restaurantorders;
 
+import java.util.ArrayList;
+
 public class Order {
     private int id;
     private int user_id;
@@ -26,6 +28,8 @@ public class Order {
             dispatch_time,
             created_at,
             updated_at;
+
+    public ArrayList<OrderItem> cart;
 
     public int getId() {
         return id;
@@ -225,5 +229,13 @@ public class Order {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public ArrayList<OrderItem> getCart() {
+        return cart;
+    }
+
+    public void setCart(ArrayList<OrderItem> cart) {
+        this.cart = cart;
     }
 }

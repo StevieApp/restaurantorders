@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SpecificOrder extends AppCompatActivity {
@@ -50,6 +53,7 @@ public class SpecificOrder extends AppCompatActivity {
     Toolbar toolbar;
     MaterialButton buttondispatch, buttoncanceldispatch;
     Order ord;
+    ArrayList<OrderItem> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +115,10 @@ public class SpecificOrder extends AppCompatActivity {
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
                 + orderidd;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RecyclerView recyclerView = findViewById(R.id.recyclerviews);
+        final ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(this, items);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -133,8 +141,8 @@ public class SpecificOrder extends AppCompatActivity {
                             ord = me;
                             textdeliveryplace.setText(me.getDelivery_address());
                             textdeliverynumber.setText(String.valueOf(me.getDelivery_contact_phone_number()));
-                            String pending = "pending";
-                            String dispatched = "dispatched";
+                            String pending = "Pending";
+                            String dispatched = "Dispatched";
                             if (me.getDispatch_status() == 0) {
                                 textdispatchstatus.setText(pending);
                                 textdispatchstatus.setTextColor(Color.GREEN);
@@ -154,10 +162,12 @@ public class SpecificOrder extends AppCompatActivity {
                             } else {
                                 textdispatchdate.setText(me.getDispatch_time());
                             }
+                            items.addAll(me.getCart());
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
                             e.printStackTrace();
                         }
+                        adapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {
@@ -195,7 +205,7 @@ public class SpecificOrder extends AppCompatActivity {
                 JSONObject y;
                 try {
                     y = new JSONObject(gee);
-                    Log.d("loooooooooooooooming", y.toString());
+                    Log.d("boooooooooooooooming", y.toString());
                     JsonObjectRequest objectRequest = new JsonObjectRequest(
                             Request.Method.PUT,
                             url,
