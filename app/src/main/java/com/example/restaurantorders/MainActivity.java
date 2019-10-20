@@ -16,30 +16,37 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
 
+    int i = 0;
     // to check if we are connected to Network
     boolean isConnected = true;
     String TAG = "Networking ME:";
+    int g = 0;
+    // to check if we are monitoring Network
+    private boolean monitoringConnectivity = false;
     private ConnectivityManager.NetworkCallback connectivityCallback
             = new ConnectivityManager.NetworkCallback() {
         @Override
         public void onAvailable(Network network) {
             isConnected = true;
-            Thread me = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        sleep(2000);
-                        Intent intent = new Intent(getApplicationContext(), Viewing.class);
-                        startActivity(intent);
-                        finish();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            if (i == 0) {
+                Thread me = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            sleep(2000);
+                            Intent intent = new Intent(getApplicationContext(), Viewing.class);
+                            startActivity(intent);
+                            finish();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            };
-            me.start();
-            Toast.makeText(getApplicationContext(), "Connected",
-                    Toast.LENGTH_SHORT).show();
+                };
+                me.start();
+                Toast.makeText(getApplicationContext(), "Connected",
+                        Toast.LENGTH_SHORT).show();
+            }
+            i++;
             Log.d(TAG, "INTERNET CONNECTED");
         }
 
@@ -51,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "INTERNET LOST");
         }
     };
-    // to check if we are monitoring Network
-    private boolean monitoringConnectivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,20 +112,25 @@ public class MainActivity extends AppCompatActivity {
             monitoringConnectivity = true;
         } else {
             Log.d(TAG, " NOW NETWORK!");
-            Thread me = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        sleep(2000);
-                        Intent intent = new Intent(getApplicationContext(), Viewing.class);
-                        startActivity(intent);
-                        finish();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            if (g == 0) {
+                Thread me = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            sleep(2000);
+                            Intent intent = new Intent(getApplicationContext(), Viewing.class);
+                            startActivity(intent);
+                            finish();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            };
-            me.start();
+                };
+                me.start();
+                Toast.makeText(getApplicationContext(), "Connected",
+                        Toast.LENGTH_SHORT).show();
+            }
+            g++;
         }
     }
 
