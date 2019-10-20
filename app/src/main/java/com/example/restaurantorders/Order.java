@@ -6,16 +6,16 @@ public class Order {
     private int id;
     private int user_id;
     private int country_code;
-    private int mobile;
     private int total;
     private int dispatch_status;
     private int delivery_reference;
-    private int delivery_contact_phone_number;
     private int delivery_charge;
     private int payment_details_amount;
     private String name,
             email,
             error,
+            mobile,
+            delivery_contact_phone_number,
             delivery_address,
             delivery_drop_off_coordinate,
             delivery_locality,
@@ -55,11 +55,11 @@ public class Order {
         this.country_code = country_code;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -87,11 +87,11 @@ public class Order {
         this.delivery_reference = delivery_reference;
     }
 
-    public int getDelivery_contact_phone_number() {
+    public String getDelivery_contact_phone_number() {
         return delivery_contact_phone_number;
     }
 
-    public void setDelivery_contact_phone_number(int delivery_contact_phone_number) {
+    public void setDelivery_contact_phone_number(String delivery_contact_phone_number) {
         this.delivery_contact_phone_number = delivery_contact_phone_number;
     }
 
