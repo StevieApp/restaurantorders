@@ -38,6 +38,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "OnBindViewHolder: called.");
         holder.itemnumber.setText(String.valueOf(position + 1));
+        holder.productid.setText(String.valueOf(itemss.get(position).getProduct_id()));
         holder.itemname.setText(itemss.get(position).getProduct_name());
         if (itemss.get(position).getProducts_attribute_accompaniment() == null) {
             holder.accompany.setText("N/A");
@@ -56,6 +57,12 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             holder.itempricing.setText(String.valueOf(itemss.get(position).getPrice()));
         }
         holder.quantity.setText(String.valueOf(itemss.get(position).getQuantity()));
+        if (String.valueOf(itemss.get(position).getAccompaniment_id()).equals("")) {
+            holder.accompanimentid.setText("N/A");
+        } else {
+            holder.accompanimentid.setText(String
+                    .valueOf(itemss.get(position).getAccompaniment_id()));
+        }
     }
 
     @Override
@@ -70,7 +77,9 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 quantity,
                 itempricing,
                 accompany,
-                description;
+                description,
+                productid,
+                accompanimentid;
         LinearLayout singleorderitem;
 
         public ViewHolder(@NonNull View itemView) {
@@ -82,7 +91,8 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             accompany = itemView.findViewById(R.id.accompany);
             description = itemView.findViewById(R.id.description);
             singleorderitem = itemView.findViewById(R.id.singleorderitem);
-
+            productid = itemView.findViewById(R.id.productid);
+            accompanimentid = itemView.findViewById(R.id.accompanimentid);
         }
     }
 }

@@ -57,4 +57,8 @@
     <string name="itemdescription">itemdescription</string>
     <string name="item">Item</string>
     <string name="itemnumber">itemnumber</string>
+    <string name="product_id">Product ID</string>
+    <string name="prodid">prodid</string>
+    <string name="accompaniment_id">Accompaniment ID</string>
+    <string name="accompanimentid">accompanimentid</string>
 </resources>

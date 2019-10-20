@@ -48,6 +48,26 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/prodid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/product_id" />
+
+            <TextView
+                android:id="@+id/productid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/prodid" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
                 android:id="@+id/nameitem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,6 +120,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/itempricing" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/accompanyid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/accompaniment_id" />
+
+            <TextView
+                android:id="@+id/accompanimentid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/accompanimentid" />
         </LinearLayout>
 
         <LinearLayout
