@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             me.start();
+            Toast.makeText(getApplicationContext(), "Connected",
+                    Toast.LENGTH_SHORT).show();
             Log.d(TAG, "INTERNET CONNECTED");
         }
 
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
             // SHOW ANY ACTION YOU WANT TO SHOW
             // WHEN WE ARE NOT CONNECTED TO INTERNET/NETWORK
             Log.d(TAG, " NO NETWORK!");
+            Toast.makeText(this, "No Internet Connection",
+                    Toast.LENGTH_SHORT).show();
 // if Network is not connected we will register a network callback to  monitor network
             connectivityManager.registerNetworkCallback(
                     new NetworkRequest.Builder()

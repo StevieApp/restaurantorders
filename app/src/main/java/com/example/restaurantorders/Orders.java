@@ -1,16 +1,10 @@
 package com.example.restaurantorders;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -107,21 +101,5 @@ public class Orders extends Fragment {
                 });
 
         requestQueue.add(objectRequest);
-
-        BroadcastReceiver net = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-                    //we are connected to a network
-                    requestQueue.add(objectRequest);
-                } else {
-                    Toast.makeText(getActivity(), "No active internet connection", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-        //getActivity().registerReceiver(net, new IntentFilter());
-        //net.onReceive(getActivity(), new Intent());
     }
 }
