@@ -1,5 +1,6 @@
 package com.example.restaurantorders;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -35,6 +36,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class SpecificOrder extends AppCompatActivity {
 
@@ -88,11 +90,14 @@ public class SpecificOrder extends AppCompatActivity {
         buttondispatch = findViewById(R.id.buttondispatch);
         buttoncanceldispatch = findViewById(R.id.buttoncanceldispatch);
 
+        buttondispatch.setEnabled(false);
+        buttoncanceldispatch.setEnabled(false);
+
         specificorderid.setText(getIntent().getStringExtra("text"));
         toolbar.setTitle(getIntent().getStringExtra("text"));
         ownername.setText(getIntent().getStringExtra("ownername"));
         dispatchstatus.setText(getIntent().getStringExtra("dispatchstatus"));
-        if (getIntent().getStringExtra("dispatchstatus").equals("Pending")) {
+        if (Objects.requireNonNull(getIntent().getStringExtra("dispatchstatus")).equals("Pending")) {
             dispatchstatus.setTextColor(Color.GREEN);
             textdispatchstatus.setTextColor(Color.GREEN);
         } else {
@@ -117,7 +122,7 @@ public class SpecificOrder extends AppCompatActivity {
 
 
         String orderid = getIntent().getStringExtra("text");
-        String orderidd = orderid.replace("#", "");
+        String orderidd = Objects.requireNonNull(orderid).replace("#", "");
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
                 + orderidd;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -125,6 +130,11 @@ public class SpecificOrder extends AppCompatActivity {
         final ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(this, items);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
 
         final JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -168,6 +178,11 @@ public class SpecificOrder extends AppCompatActivity {
                             } else {
                                 textdispatchdate.setText(me.getDispatch_time());
                             }
+                            if (me.getDispatch_status() == 0) {
+                                buttondispatch.setEnabled(true);
+                            } else {
+                                buttoncanceldispatch.setEnabled(true);
+                            }
                             items.addAll(me.getCart());
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
@@ -191,9 +206,10 @@ public class SpecificOrder extends AppCompatActivity {
 
         buttondispatch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
+                progressDialog.show();
                 String orderid = getIntent().getStringExtra("text");
-                String orderidd = orderid.replace("#", "");
+                String orderidd = Objects.requireNonNull(orderid).replace("#", "");
                 String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
                         + orderidd;
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -213,45 +229,77 @@ public class SpecificOrder extends AppCompatActivity {
                     y = new JSONObject(gee);
                     Log.d("boooooooooooooooming", y.toString());
                     JsonObjectRequest objectRequest = new JsonObjectRequest(
-                            Request.Method.PUT,
+                            Request.Method.POST,
                             url,
                             y,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject jsonObject) {
-                                    //Log.e("response from api", jsonObject.toString());
                                     System.out.println(jsonObject.toString());
-                                    //Log.d("response from api", "onResponse: \n"
-                                    //       + jsonObject.toString());
-                                /*try {
-                                    JSONObject j = jsonObject.getJSONObject("data");
-                                    Log.d("response from api", j.toString());
-                                    JSONObject rr = j.getJSONObject("orders");
-                                    Log.d("response from api", rr.toString());
-                                    Gson json = new Gson();
-                                    Order me = json.fromJson(rr.toString(), Order.class);
-                                    textdeliveryplace.setText(me.getDelivery_address());
-                                    textdeliverynumber.setText(String.valueOf(me.getDelivery_contact_phone_number()));
-                                    String pending = "pending";
-                                    String dispatched = "dispatched";
-                                    if(me.getDispatch_status() == 0){
-                                        textdispatchstatus.setText(pending);
-                                        textdispatchstatus.setTextColor(Color.GREEN);
-                                        dispatchstatus.setText(pending);
-                                        dispatchstatus.setTextColor(Color.GREEN);
-                                    }else{
-                                        textdispatchstatus.setText(dispatched);
-                                        textdispatchstatus.setTextColor(Color.RED);
-                                        dispatchstatus.setText(dispatched);
-                                        dispatchstatus.setTextColor(Color.RED);
-                                    }
-                                    Log.d("response from api", me.getName());
-                                } catch (JSONException e) {
-                                    Log.d("response from api", "paaaapiiii");
-                                    e.printStackTrace();
-                                }*/
                                     Toast.makeText(SpecificOrder.this,
-                                            "Updated", Toast.LENGTH_SHORT).show();
+                                            "Order dispatched",
+                                            Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError volleyError) {
+                                    Log.e("error from api", volleyError.toString());
+                                    System.out.println(volleyError.toString());
+                                    Log.d("error from api", "onErrorResponse: \n"
+                                            + volleyError.toString());
+                                    Toast.makeText(SpecificOrder.this,
+                                            "Unable to update", Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            }
+                    );
+                    requestQueue.add(objectRequest);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                progressDialog.hide();
+                progressDialog.cancel();
+            }
+        });
+
+        buttoncanceldispatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                progressDialog.show();
+                String orderid = getIntent().getStringExtra("text");
+                String orderidd = Objects.requireNonNull(orderid).replace("#", "");
+                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+                        + orderidd;
+                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                Date date = new Date();
+                String currentdate = formatter.format(date);
+                ord.setDispatch_status(0);
+                ord.setDispatch_time(currentdate);
+                Gson gson = new Gson();
+                String gee = gson.toJson(ord);
+                Log.d("loooooooooooooooming", gee);
+                JsonParser parser = new JsonParser();
+                JsonObject json = (JsonObject) parser.parse(gee);
+                JSONObject y;
+                try {
+                    y = new JSONObject(gee);
+                    Log.d("boooooooooooooooming", y.toString());
+                    JsonObjectRequest objectRequest = new JsonObjectRequest(
+                            Request.Method.POST,
+                            url,
+                            y,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject jsonObject) {
+                                    System.out.println(jsonObject.toString());
+                                    Toast.makeText(SpecificOrder.this,
+                                            "Dispatching Cannot be Undone",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             },
                             new Response.ErrorListener() {
@@ -270,6 +318,8 @@ public class SpecificOrder extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                progressDialog.hide();
+                progressDialog.cancel();
             }
         });
     }
@@ -309,7 +359,7 @@ public class SpecificOrder extends AppCompatActivity {
         if (monitoringConnectivity) {
             final ConnectivityManager connectivityManager
                     = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            connectivityManager.unregisterNetworkCallback(connectivityCallback);
+            Objects.requireNonNull(connectivityManager).unregisterNetworkCallback(connectivityCallback);
             monitoringConnectivity = false;
         }
         super.onPause();
@@ -323,7 +373,7 @@ public class SpecificOrder extends AppCompatActivity {
 
         // Getting network Info
         // give Network Access Permission in Manifest
-        final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        final NetworkInfo activeNetworkInfo = Objects.requireNonNull(connectivityManager).getActiveNetworkInfo();
 
         // isConnected is a boolean variable
         // here we check if network is connected or is getting connected
