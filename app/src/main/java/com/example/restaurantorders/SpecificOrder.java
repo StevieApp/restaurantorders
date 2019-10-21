@@ -63,6 +63,29 @@ public class SpecificOrder extends AppCompatActivity {
     Order ord;
     ArrayList<OrderItem> items = new ArrayList<>();
 
+    boolean isConnected = true;
+    String TAG = "Networking ME:";
+    private ConnectivityManager.NetworkCallback connectivityCallback
+            = new ConnectivityManager.NetworkCallback() {
+        @Override
+        public void onAvailable(Network network) {
+            isConnected = true;
+            Log.d(TAG, "INTERNET CONNECTED");
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
+        }
+
+        @Override
+        public void onLost(Network network) {
+            Toast.makeText(getApplicationContext(), "No Internet Connection",
+                    Toast.LENGTH_SHORT).show();
+            isConnected = false;
+            Log.d(TAG, "INTERNET LOST");
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -240,7 +263,9 @@ public class SpecificOrder extends AppCompatActivity {
                                             "Order dispatched",
                                             Toast.LENGTH_SHORT).show();
                                     finish();
+                                    overridePendingTransition(0, 0);
                                     startActivity(getIntent());
+                                    overridePendingTransition(0, 0);
                                 }
                             },
                             new Response.ErrorListener() {
@@ -323,27 +348,6 @@ public class SpecificOrder extends AppCompatActivity {
             }
         });
     }
-
-    boolean isConnected = true;
-    String TAG = "Networking ME:";
-    private ConnectivityManager.NetworkCallback connectivityCallback
-            = new ConnectivityManager.NetworkCallback() {
-        @Override
-        public void onAvailable(Network network) {
-            isConnected = true;
-            Log.d(TAG, "INTERNET CONNECTED");
-            finish();
-            startActivity(getIntent());
-        }
-
-        @Override
-        public void onLost(Network network) {
-            Toast.makeText(getApplicationContext(), "No Internet Connection",
-                    Toast.LENGTH_SHORT).show();
-            isConnected = false;
-            Log.d(TAG, "INTERNET LOST");
-        }
-    };
     // to check if we are monitoring Network
     private boolean monitoringConnectivity = false;
 

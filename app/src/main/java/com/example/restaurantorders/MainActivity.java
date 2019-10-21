@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
                             sleep(2000);
                             Intent intent = new Intent(getApplicationContext(), Viewing.class);
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
+                            overridePendingTransition(0, 0);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -120,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
                             sleep(2000);
                             Intent intent = new Intent(getApplicationContext(), Viewing.class);
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
+                            overridePendingTransition(0, 0);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
