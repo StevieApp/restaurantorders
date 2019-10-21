@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         if (monitoringConnectivity) {
             final ConnectivityManager connectivityManager
                     = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            connectivityManager.unregisterNetworkCallback(connectivityCallback);
+            Objects.requireNonNull(connectivityManager).unregisterNetworkCallback(connectivityCallback);
             monitoringConnectivity = false;
         }
         super.onPause();
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Getting network Info
         // give Network Access Permission in Manifest
-        final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        final NetworkInfo activeNetworkInfo = Objects.requireNonNull(connectivityManager).getActiveNetworkInfo();
 
         // isConnected is a boolean variable
         // here we check if network is connected or is getting connected
