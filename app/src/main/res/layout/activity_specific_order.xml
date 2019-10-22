@@ -45,9 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:layout_marginLeft="60dp"
                 android:layout_marginTop="?attr/actionBarSize"
-                android:layout_marginRight="16dp"
                 android:orientation="vertical"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp">
@@ -93,7 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:layout_marginRight="15dp"
+                            android:layout_marginEnd="15dp"
                             android:backgroundTint="@android:color/holo_green_dark"
                             android:text="@string/dispatchbutton" />
 
@@ -496,22 +494,22 @@
                         android:id="@+id/textcart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".6"
                         android:text="@string/cart"
-                        android:textSize="14sp" />
+                        android:gravity="center"
+                        android:textSize="17sp" />
+                </LinearLayout>
 
-                    <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerviews"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight=".4">
+                        android:layout_margin="5dp">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerviews"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        </androidx.recyclerview.widget.RecyclerView>
-                    </LinearLayout>
+                    </androidx.recyclerview.widget.RecyclerView>
 
                 </LinearLayout>
 

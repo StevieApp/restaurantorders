@@ -27,15 +27,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
 public class SpecificOrder extends AppCompatActivity {
@@ -152,7 +148,9 @@ public class SpecificOrder extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerviews);
         final ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(this, items);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL,
+                false));
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
@@ -237,24 +235,10 @@ public class SpecificOrder extends AppCompatActivity {
                         + orderidd;
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                Date date = new Date();
-                String currentdate = formatter.format(date);
-                ord.setDispatch_status(1);
-                ord.setDispatch_time(currentdate);
-                Gson gson = new Gson();
-                String gee = gson.toJson(ord);
-                Log.d("loooooooooooooooming", gee);
-                JsonParser parser = new JsonParser();
-                JsonObject json = (JsonObject) parser.parse(gee);
-                JSONObject y;
-                try {
-                    y = new JSONObject(gee);
-                    Log.d("boooooooooooooooming", y.toString());
                     JsonObjectRequest objectRequest = new JsonObjectRequest(
                             Request.Method.POST,
                             url,
-                            y,
+                            null,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject jsonObject) {
@@ -282,9 +266,6 @@ public class SpecificOrder extends AppCompatActivity {
                             }
                     );
                     requestQueue.add(objectRequest);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
                 progressDialog.hide();
                 progressDialog.cancel();
             }
@@ -300,24 +281,10 @@ public class SpecificOrder extends AppCompatActivity {
                         + orderidd;
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                Date date = new Date();
-                String currentdate = formatter.format(date);
-                ord.setDispatch_status(0);
-                ord.setDispatch_time(currentdate);
-                Gson gson = new Gson();
-                String gee = gson.toJson(ord);
-                Log.d("loooooooooooooooming", gee);
-                JsonParser parser = new JsonParser();
-                JsonObject json = (JsonObject) parser.parse(gee);
-                JSONObject y;
-                try {
-                    y = new JSONObject(gee);
-                    Log.d("boooooooooooooooming", y.toString());
                     JsonObjectRequest objectRequest = new JsonObjectRequest(
                             Request.Method.POST,
                             url,
-                            y,
+                            null,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject jsonObject) {
@@ -340,9 +307,6 @@ public class SpecificOrder extends AppCompatActivity {
                             }
                     );
                     requestQueue.add(objectRequest);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
                 progressDialog.hide();
                 progressDialog.cancel();
             }

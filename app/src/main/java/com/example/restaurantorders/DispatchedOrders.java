@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class DispatchedOrders extends Fragment {
@@ -55,10 +56,14 @@ public class DispatchedOrders extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerviews);
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getContext(), orderss);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        LinearLayoutManager nu = new LinearLayoutManager(this.getContext(),
+                LinearLayoutManager.VERTICAL,
+                true);
+        nu.setStackFromEnd(true);
+        recyclerView.setLayoutManager(nu);
 
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
 
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
