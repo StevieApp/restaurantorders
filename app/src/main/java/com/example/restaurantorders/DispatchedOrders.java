@@ -1,6 +1,7 @@
 package com.example.restaurantorders;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,6 +65,11 @@ public class DispatchedOrders extends Fragment {
         nu.setStackFromEnd(true);
         recyclerView.setLayoutManager(nu);
 
+        final ProgressDialog progress = new ProgressDialog(getActivity());
+        progress.setMessage("Getting Dispatched Orders...");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
+
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
 
@@ -100,9 +106,11 @@ public class DispatchedOrders extends Fragment {
                             }
                             Order me = orders.get(1);
                             Log.d("response from api", me.getName());
+                            progress.hide();
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
                             e.printStackTrace();
+                            progress.hide();
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -114,6 +122,7 @@ public class DispatchedOrders extends Fragment {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
+                        progress.hide();
                     }
                 });
         requestQueue.add(objectRequest);

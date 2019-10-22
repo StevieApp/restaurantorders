@@ -1,5 +1,6 @@
 package com.example.restaurantorders;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,6 +62,10 @@ public class PendingOrders extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
         availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
+        final ProgressDialog progress = new ProgressDialog(getActivity());
+        progress.setMessage("Getting Pending Orders...");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -93,9 +98,11 @@ public class PendingOrders extends Fragment {
                             }
                             Order me = orders.get(1);
                             Log.d("response from api", me.getName());
+                            progress.hide();
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
                             e.printStackTrace();
+                            progress.hide();
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -107,6 +114,7 @@ public class PendingOrders extends Fragment {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
+                        progress.hide();
                     }
                 });
         requestQueue.add(objectRequest);

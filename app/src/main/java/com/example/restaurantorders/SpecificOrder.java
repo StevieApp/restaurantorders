@@ -53,7 +53,8 @@ public class SpecificOrder extends AppCompatActivity {
             textdispatchstatus,
             textpayref,
             textpayno,
-            textdispatchdate;
+            textdispatchdate,
+            textcart;
     Toolbar toolbar;
     MaterialButton buttondispatch, buttoncanceldispatch;
     Order ord;
@@ -108,6 +109,7 @@ public class SpecificOrder extends AppCompatActivity {
         textdispatchdate = findViewById(R.id.textdispatchdate);
         buttondispatch = findViewById(R.id.buttondispatch);
         buttoncanceldispatch = findViewById(R.id.buttoncanceldispatch);
+        textcart = findViewById(R.id.textcart);
 
         buttondispatch.setEnabled(false);
         buttoncanceldispatch.setEnabled(false);
@@ -153,9 +155,12 @@ public class SpecificOrder extends AppCompatActivity {
                 false));
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
+        final ProgressDialog progressDiag = new ProgressDialog(this);
+        progressDiag.setMessage("Getting Cart Items...");
+        progressDiag.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDiag.show();
 
         final JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -205,9 +210,13 @@ public class SpecificOrder extends AppCompatActivity {
                                 buttoncanceldispatch.setEnabled(true);
                             }
                             items.addAll(me.getCart());
+                            String Items = "Cart Items " + items.size();
+                            textcart.setText(Items);
+                            progressDiag.hide();
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
                             e.printStackTrace();
+                            progressDiag.hide();
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -219,6 +228,7 @@ public class SpecificOrder extends AppCompatActivity {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
+                        progressDiag.hide();
                     }
                 }
         );
@@ -228,6 +238,7 @@ public class SpecificOrder extends AppCompatActivity {
         buttondispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+                progressDialog.setMessage("Dispatching...");
                 progressDialog.show();
                 String orderid = getIntent().getStringExtra("text");
                 String orderidd = Objects.requireNonNull(orderid).replace("#", "");
@@ -250,6 +261,7 @@ public class SpecificOrder extends AppCompatActivity {
                                     overridePendingTransition(0, 0);
                                     startActivity(getIntent());
                                     overridePendingTransition(0, 0);
+                                    progressDialog.hide();
                                 }
                             },
                             new Response.ErrorListener() {
@@ -262,18 +274,19 @@ public class SpecificOrder extends AppCompatActivity {
                                     Toast.makeText(SpecificOrder.this,
                                             "Unable to update", Toast.LENGTH_SHORT)
                                             .show();
+
+                                    progressDialog.hide();
                                 }
                             }
                     );
                     requestQueue.add(objectRequest);
-                progressDialog.hide();
-                progressDialog.cancel();
             }
         });
 
         buttoncanceldispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+                progressDialog.setMessage("Canceling Dispatch...");
                 progressDialog.show();
                 String orderid = getIntent().getStringExtra("text");
                 String orderidd = Objects.requireNonNull(orderid).replace("#", "");
@@ -292,6 +305,7 @@ public class SpecificOrder extends AppCompatActivity {
                                     Toast.makeText(SpecificOrder.this,
                                             "Dispatching Cannot be Undone",
                                             Toast.LENGTH_SHORT).show();
+                                    progressDialog.hide();
                                 }
                             },
                             new Response.ErrorListener() {
@@ -303,12 +317,11 @@ public class SpecificOrder extends AppCompatActivity {
                                             + volleyError.toString());
                                     Toast.makeText(SpecificOrder.this,
                                             "Unable to update", Toast.LENGTH_SHORT).show();
+                                    progressDialog.hide();
                                 }
                             }
                     );
                     requestQueue.add(objectRequest);
-                progressDialog.hide();
-                progressDialog.cancel();
             }
         });
     }
