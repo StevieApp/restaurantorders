@@ -14,9 +14,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Objects;
 
 public class Viewing extends AppCompatActivity {
 
@@ -31,9 +32,6 @@ public class Viewing extends AppCompatActivity {
             isConnected = true;
 
             BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
-            bottom_nav.getSelectedItemId();
-            Fragment frgg;
-            final FragmentTransaction ftt;
             if (bottom_nav.getSelectedItemId() == R.id.allorders) {
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -99,10 +97,6 @@ public class Viewing extends AppCompatActivity {
         setContentView(R.layout.activity_viewing);
         BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
         bottom_nav.setOnNavigationItemSelectedListener(newListener);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
-                new Orders()).commit();
-
     }
 
     @Override
@@ -131,13 +125,13 @@ public class Viewing extends AppCompatActivity {
         if (monitoringConnectivity) {
             final ConnectivityManager connectivityManager
                     = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            connectivityManager.unregisterNetworkCallback(connectivityCallback);
+            Objects.requireNonNull(connectivityManager).unregisterNetworkCallback(connectivityCallback);
             monitoringConnectivity = false;
         }
         super.onPause();
 
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_area) != null) {
-            getSupportFragmentManager().findFragmentById(R.id.fragment_area)
+            Objects.requireNonNull(getSupportFragmentManager().findFragmentById(R.id.fragment_area))
                     .setRetainInstance(true);
         }
     }
