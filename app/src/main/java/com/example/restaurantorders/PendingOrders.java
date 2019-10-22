@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,10 +28,12 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PendingOrders extends Fragment {
 
     private ArrayList<Order> orderss = new ArrayList<>();
+    private TextView availability;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,8 @@ public class PendingOrders extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
+        availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -83,6 +87,9 @@ public class PendingOrders extends Fragment {
                                 if (g.getDispatch_status() == 0) {
                                     orderss.add(g);
                                 }
+                            }
+                            if (orderss.size() == 0) {
+                                availability.setVisibility(getView().VISIBLE);
                             }
                             Order me = orders.get(1);
                             Log.d("response from api", me.getName());

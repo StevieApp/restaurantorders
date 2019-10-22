@@ -2,7 +2,7 @@
     <string name="app_name">RestaurantOrders</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="orderdate">01-01-1997</string>
+    <string name="orderdate">01–01–1997</string>
     <string name="orderid">#0001</string>
     <string name="orderowner">by orderowner</string>
     <string name="img">mychicken</string>
@@ -61,4 +61,7 @@
     <string name="prodid">prodid</string>
     <string name="accompaniment_id">Accompaniment ID</string>
     <string name="accompanimentid">accompanimentid</string>
+    <string name="no_dispatched_orders">No Dispatched Orders</string>
+    <string name="no_orders_availabile">No Orders Availabile</string>
+    <string name="no_pending_orders">No Pending Orders</string>
 </resources>

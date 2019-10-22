@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ import java.util.Objects;
 public class Orders extends Fragment {
 
     private ArrayList<Order> orderss = new ArrayList<>();
+    private TextView availability;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class Orders extends Fragment {
 
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
         final RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
-
+        availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
         final JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -86,6 +88,9 @@ public class Orders extends Fragment {
                             }.getType();
                             ArrayList<Order> orders = json.fromJson(rr.toString(), types);
                             orderss.addAll(orders);
+                            if (orderss.size() == 0) {
+                                availability.setVisibility(getView().VISIBLE);
+                            }
                             Order me = orders.get(1);
                             Log.d("response from api", me.getName());
                         } catch (JSONException e) {
