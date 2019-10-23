@@ -19,8 +19,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
     private Context mContext;
 
 
-    public ItemRecyclerViewAdapter(Context context,
-                                   ArrayList<OrderItem> items) {
+    public ItemRecyclerViewAdapter(Context context, ArrayList<OrderItem> items) {
         itemss = items;
         mContext = context;
     }
@@ -63,7 +62,8 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             holder.accompanimentid.setText(String
                     .valueOf(itemss.get(position).getAccompaniment_id()));
         }
-        if (itemss.get(position).getProduct_attrubute_size().equals("")) {
+        if (itemss.get(position).getProduct_attrubute_size() == null ||
+                itemss.get(position).getProduct_attrubute_size().equals("")) {
             holder.attribute.setText("N/A");
         } else {
             holder.attribute.setText(itemss.get(position).getProduct_attrubute_size());

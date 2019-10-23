@@ -24,8 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
 
 
-    public RecyclerViewAdapter(Context context,
-                               ArrayList<Order> orders) {
+    public RecyclerViewAdapter(Context context, ArrayList<Order> orders) {
         orderss = orders;
         mContext = context;
     }
