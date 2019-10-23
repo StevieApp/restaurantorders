@@ -63,6 +63,11 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             holder.accompanimentid.setText(String
                     .valueOf(itemss.get(position).getAccompaniment_id()));
         }
+        if (itemss.get(position).getProduct_attrubute_size().equals("")) {
+            holder.attribute.setText("N/A");
+        } else {
+            holder.attribute.setText(itemss.get(position).getProduct_attrubute_size());
+        }
     }
 
     @Override
@@ -79,7 +84,8 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 accompany,
                 description,
                 productid,
-                accompanimentid;
+                accompanimentid,
+                attribute;
         LinearLayout singleorderitem;
 
         public ViewHolder(@NonNull View itemView) {
@@ -93,6 +99,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             singleorderitem = itemView.findViewById(R.id.singleorderitem);
             productid = itemView.findViewById(R.id.productid);
             accompanimentid = itemView.findViewById(R.id.accompanimentid);
+            attribute = itemView.findViewById(R.id.attribute);
         }
     }
 }

@@ -64,4 +64,6 @@
     <string name="no_dispatched_orders">No Dispatched Orders</string>
     <string name="no_orders_availabile">No Orders Availabile</string>
     <string name="no_pending_orders">No Pending Orders</string>
+    <string name="product_attribute">Product Attribute</string>
+    <string name="attribute">attribute</string>
 </resources>
