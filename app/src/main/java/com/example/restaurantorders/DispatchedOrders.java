@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -110,6 +111,8 @@ public class DispatchedOrders extends Fragment {
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
                             e.printStackTrace();
+                            Toast.makeText(getActivity(), "API object may have changed",
+                                    Toast.LENGTH_SHORT).show();
                             progress.hide();
                         }
                         adapter.notifyDataSetChanged();
@@ -122,6 +125,8 @@ public class DispatchedOrders extends Fragment {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
+                        Toast.makeText(getActivity(), "Unable to load orders",
+                                Toast.LENGTH_SHORT).show();
                         progress.hide();
                     }
                 });

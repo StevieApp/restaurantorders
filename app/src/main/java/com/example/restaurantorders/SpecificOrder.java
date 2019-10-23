@@ -228,6 +228,8 @@ public class SpecificOrder extends AppCompatActivity {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
+                        Toast.makeText(SpecificOrder.this, "Unable to load cart Items",
+                                Toast.LENGTH_SHORT).show();
                         progressDiag.hide();
                     }
                 }
