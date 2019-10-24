@@ -1,4 +1,5 @@
-package com.example.restaurantorders;
+package com.kilimanjarofood.restaurantorders;
+
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -32,7 +33,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PendingOrders extends Fragment {
+
+public class DispatchedOrders extends Fragment {
 
     private ArrayList<Order> orderss = new ArrayList<>();
     private TextView availability;
@@ -40,14 +42,15 @@ public class PendingOrders extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pending_orders, container, false);
+        return inflater.inflate(R.layout.fragment_dispatched_orders, container, false);
     }
 
     @Override
@@ -57,16 +60,21 @@ public class PendingOrders extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerviews);
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getContext(), orderss);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        LinearLayoutManager nu = new LinearLayoutManager(this.getContext(),
+                LinearLayoutManager.VERTICAL,
+                true);
+        nu.setStackFromEnd(true);
+        recyclerView.setLayoutManager(nu);
+
+        final ProgressDialog progress = new ProgressDialog(getActivity());
+        progress.setMessage("Getting Dispatched Orders...");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
 
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
-        availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
-        final ProgressDialog progress = new ProgressDialog(getActivity());
-        progress.setMessage("Getting Pending Orders...");
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progress.show();
+        availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -90,7 +98,7 @@ public class PendingOrders extends Fragment {
                             ArrayList<Order> orders = json.fromJson(rr.toString(), types);
                             for (int i = 0; i < orders.size(); i++) {
                                 Order g = orders.get(i);
-                                if (g.getDispatch_status() == 0) {
+                                if (g.getDispatch_status() == 1) {
                                     orderss.add(g);
                                 }
                             }
@@ -124,4 +132,5 @@ public class PendingOrders extends Fragment {
                 });
         requestQueue.add(objectRequest);
     }
+
 }

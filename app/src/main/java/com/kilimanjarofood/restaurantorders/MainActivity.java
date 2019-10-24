@@ -1,4 +1,4 @@
-package com.example.restaurantorders;
+package com.kilimanjarofood.restaurantorders;
 
 import android.content.Context;
 import android.content.Intent;

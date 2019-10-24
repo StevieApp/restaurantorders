@@ -1,4 +1,4 @@
-package com.example.restaurantorders;
+package com.kilimanjarofood.restaurantorders;
 
 
 import android.content.Context;
@@ -57,9 +57,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             holder.orderstatus.setText(pend);
         }
         holder.orderid.setText(id);
-        String total = "Ksh " + String.valueOf(orderss.get(position).getTotal());
+        String total = "Ksh " + orderss.get(position).getTotal();
         holder.ordertotal.setText(total);
-        holder.deliveryadd.setText(orderss.get(position).getDelivery_address());
+        String add = orderss.get(position).getDelivery_address();
+        String addlittle = add.substring(0, add.indexOf(","));
+        holder.deliveryadd.setText(add);
         holder.orderowner.setText(owner);
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override

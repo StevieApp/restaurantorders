@@ -1,5 +1,4 @@
-package com.example.restaurantorders;
-
+package com.kilimanjarofood.restaurantorders;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -34,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class DispatchedOrders extends Fragment {
+public class Orders extends Fragment {
 
     private ArrayList<Order> orderss = new ArrayList<>();
     private TextView availability;
@@ -50,7 +49,7 @@ public class DispatchedOrders extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dispatched_orders, container, false);
+        return inflater.inflate(R.layout.fragment_orders, container, false);
     }
 
     @Override
@@ -67,16 +66,15 @@ public class DispatchedOrders extends Fragment {
         recyclerView.setLayoutManager(nu);
 
         final ProgressDialog progress = new ProgressDialog(getActivity());
-        progress.setMessage("Getting Dispatched Orders...");
+        progress.setMessage("Getting All Orders...");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.show();
 
         String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
-
+        final RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
         availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
+        final JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null,
@@ -96,12 +94,7 @@ public class DispatchedOrders extends Fragment {
                             Type types = new TypeToken<ArrayList<Order>>() {
                             }.getType();
                             ArrayList<Order> orders = json.fromJson(rr.toString(), types);
-                            for (int i = 0; i < orders.size(); i++) {
-                                Order g = orders.get(i);
-                                if (g.getDispatch_status() == 1) {
-                                    orderss.add(g);
-                                }
-                            }
+                            orderss.addAll(orders);
                             if (orderss.size() == 0) {
                                 availability.setVisibility(getView().VISIBLE);
                             }
@@ -130,7 +123,8 @@ public class DispatchedOrders extends Fragment {
                         progress.hide();
                     }
                 });
+
         requestQueue.add(objectRequest);
     }
-
 }
+

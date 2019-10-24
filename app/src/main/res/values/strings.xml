@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">RestaurantOrders</string>
-
+    <string name="app_name">Kilimanjaro Food Orders</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="orderdate">01–01–1997</string>
     <string name="orderid">#0001</string>

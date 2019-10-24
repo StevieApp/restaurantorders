@@ -1,4 +1,4 @@
-package com.example.restaurantorders;
+package com.kilimanjarofood.restaurantorders;
 
 public class OrderItem {
     private int product_id,

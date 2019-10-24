@@ -1,7 +1,8 @@
-package com.example.restaurantorders;
+package com.kilimanjarofood.restaurantorders;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -250,90 +252,112 @@ public class SpecificOrder extends AppCompatActivity {
         buttondispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                progressDialog.setMessage("Dispatching...");
-                progressDialog.show();
-                String orderid = getIntent().getStringExtra("text");
-                String orderidd = Objects.requireNonNull(orderid).replace("#", "");
-                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
-                        + orderidd;
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                new AlertDialog.Builder(SpecificOrder.this)
+                        .setTitle("Dispatch order " + getIntent().getStringExtra("text"))
+                        .setMessage("Do you really want to dispatch this order?")
+                        .setIcon(R.drawable.ic_dispatched_24dp)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                    JsonObjectRequest objectRequest = new JsonObjectRequest(
-                            Request.Method.POST,
-                            url,
-                            null,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject jsonObject) {
-                                    System.out.println(jsonObject.toString());
-                                    Toast.makeText(SpecificOrder.this,
-                                            "Order dispatched",
-                                            Toast.LENGTH_SHORT).show();
-                                    finish();
-                                    overridePendingTransition(0, 0);
-                                    startActivity(getIntent());
-                                    overridePendingTransition(0, 0);
-                                    progressDialog.hide();
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError volleyError) {
-                                    Log.e("error from api", volleyError.toString());
-                                    System.out.println(volleyError.toString());
-                                    Log.d("error from api", "onErrorResponse: \n"
-                                            + volleyError.toString());
-                                    Toast.makeText(SpecificOrder.this,
-                                            "Unable to update", Toast.LENGTH_SHORT)
-                                            .show();
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                progressDialog.setMessage("Dispatching...");
+                                progressDialog.show();
+                                String orderid = getIntent().getStringExtra("text");
+                                String orderidd = Objects.requireNonNull(orderid)
+                                        .replace("#", "");
+                                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+                                        + orderidd;
+                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-                                    progressDialog.hide();
-                                }
+                                JsonObjectRequest objectRequest = new JsonObjectRequest(
+                                        Request.Method.POST,
+                                        url,
+                                        null,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject jsonObject) {
+                                                System.out.println(jsonObject.toString());
+                                                Toast.makeText(SpecificOrder.this,
+                                                        "Order dispatched",
+                                                        Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                overridePendingTransition(0, 0);
+                                                startActivity(getIntent());
+                                                overridePendingTransition(0, 0);
+                                                progressDialog.hide();
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError volleyError) {
+                                                Log.e("error from api", volleyError.toString());
+                                                System.out.println(volleyError.toString());
+                                                Log.d("error from api", "onErrorResponse: \n"
+                                                        + volleyError.toString());
+                                                Toast.makeText(SpecificOrder.this,
+                                                        "Unable to update", Toast.LENGTH_SHORT)
+                                                        .show();
+
+                                                progressDialog.hide();
+                                            }
+                                        }
+                                );
+                                requestQueue.add(objectRequest);
                             }
-                    );
-                    requestQueue.add(objectRequest);
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 
         buttoncanceldispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                progressDialog.setMessage("Canceling Dispatch...");
-                progressDialog.show();
-                String orderid = getIntent().getStringExtra("text");
-                String orderidd = Objects.requireNonNull(orderid).replace("#", "");
-                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
-                        + orderidd;
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                new AlertDialog.Builder(SpecificOrder.this)
+                        .setTitle("Cancel dispatch for order " + getIntent().getStringExtra("text"))
+                        .setMessage("Do you really want to cancel dispatch?")
+                        .setIcon(R.drawable.ic_queue_black_24dp)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                    JsonObjectRequest objectRequest = new JsonObjectRequest(
-                            Request.Method.POST,
-                            url,
-                            null,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject jsonObject) {
-                                    System.out.println(jsonObject.toString());
-                                    Toast.makeText(SpecificOrder.this,
-                                            "Dispatching Cannot be Undone",
-                                            Toast.LENGTH_SHORT).show();
-                                    progressDialog.hide();
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError volleyError) {
-                                    Log.e("error from api", volleyError.toString());
-                                    System.out.println(volleyError.toString());
-                                    Log.d("error from api", "onErrorResponse: \n"
-                                            + volleyError.toString());
-                                    Toast.makeText(SpecificOrder.this,
-                                            "Unable to update", Toast.LENGTH_SHORT).show();
-                                    progressDialog.hide();
-                                }
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                progressDialog.setMessage("Canceling Dispatch...");
+                                progressDialog.show();
+                                String orderid = getIntent().getStringExtra("text");
+                                String orderidd = Objects.requireNonNull(orderid)
+                                        .replace("#", "");
+                                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+                                        + orderidd;
+                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+                                JsonObjectRequest objectRequest = new JsonObjectRequest(
+                                        Request.Method.POST,
+                                        url,
+                                        null,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject jsonObject) {
+                                                System.out.println(jsonObject.toString());
+                                                Toast.makeText(SpecificOrder.this,
+                                                        "Dispatching Cannot be Undone",
+                                                        Toast.LENGTH_SHORT).show();
+                                                progressDialog.hide();
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError volleyError) {
+                                                Log.e("error from api", volleyError.toString());
+                                                System.out.println(volleyError.toString());
+                                                Log.d("error from api", "onErrorResponse: \n"
+                                                        + volleyError.toString());
+                                                Toast.makeText(SpecificOrder.this,
+                                                        "Unable to update", Toast.LENGTH_SHORT).show();
+                                                progressDialog.hide();
+                                            }
+                                        }
+                                );
+                                requestQueue.add(objectRequest);
                             }
-                    );
-                    requestQueue.add(objectRequest);
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
     }
