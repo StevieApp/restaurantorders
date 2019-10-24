@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,14 +45,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.orderdate.setText(orderss.get(position).getCreated_at());
         final String id = "#" + orderss.get(position).getId();
         String owner = "by " + orderss.get(position).getName();
-        String disp = "Dispatched";
-        if (orderss.get(position).getDispatch_status() == 0) {
-            holder.orderstatus.setTextColor(Color.GREEN);
-        } else {
+        String disp = ("Dispatched").toUpperCase();
+        String pend = ("Pending").toUpperCase();
+        if (orderss.get(position).getDispatch_status() == 1) {
             holder.orderstatus.setText(disp);
+            holder.orderstatus.setTextColor(Color.GREEN);
+            holder.frame.setBackgroundColor(Color.GREEN);
+        } else {
             holder.orderstatus.setTextColor(Color.RED);
+            holder.frame.setBackgroundColor(Color.RED);
+            holder.orderstatus.setText(pend);
         }
         holder.orderid.setText(id);
+        String total = "Ksh " + String.valueOf(orderss.get(position).getTotal());
+        holder.ordertotal.setText(total);
+        holder.deliveryadd.setText(orderss.get(position).getDelivery_address());
         holder.orderowner.setText(owner);
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +133,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView orderid,
                 orderdate,
                 orderowner,
-                orderstatus;
+                orderstatus,
+                ordertotal,
+                deliveryadd;
+        FrameLayout frame;
         LinearLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -135,7 +146,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             orderid = itemView.findViewById(R.id.orderid);
             orderowner = itemView.findViewById(R.id.orderowner);
             parentLayout = itemView.findViewById(R.id.parent_layout);
-
+            frame = itemView.findViewById(R.id.frame);
+            ordertotal = itemView.findViewById(R.id.ordertotal);
+            deliveryadd = itemView.findViewById(R.id.deliveryadd);
         }
     }
 }

@@ -51,10 +51,11 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
         } else {
             holder.description.setText(itemss.get(position).getDescription());
         }
+        String price = "Ksh " + itemss.get(position).getPrice();
         if (String.valueOf(itemss.get(position).getPrice()).equals("")) {
             holder.itempricing.setText("N/A");
         } else {
-            holder.itempricing.setText(String.valueOf(itemss.get(position).getPrice()));
+            holder.itempricing.setText(price);
         }
         holder.quantity.setText(String.valueOf(itemss.get(position).getQuantity()));
         if (String.valueOf(itemss.get(position).getAccompaniment_id()).equals("")) {

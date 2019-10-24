@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 
@@ -56,6 +57,7 @@ public class SpecificOrder extends AppCompatActivity {
             textdispatchdate,
             textcart;
     Toolbar toolbar;
+    CollapsingToolbarLayout framed;
     MaterialButton buttondispatch, buttoncanceldispatch;
     Order ord;
     ArrayList<OrderItem> items = new ArrayList<>();
@@ -110,6 +112,7 @@ public class SpecificOrder extends AppCompatActivity {
         buttondispatch = findViewById(R.id.buttondispatch);
         buttoncanceldispatch = findViewById(R.id.buttoncanceldispatch);
         textcart = findViewById(R.id.textcart);
+        framed = findViewById(R.id.framed);
 
         buttondispatch.setEnabled(false);
         buttoncanceldispatch.setEnabled(false);
@@ -117,13 +120,15 @@ public class SpecificOrder extends AppCompatActivity {
         specificorderid.setText(getIntent().getStringExtra("text"));
         toolbar.setTitle(getIntent().getStringExtra("text"));
         ownername.setText(getIntent().getStringExtra("ownername"));
-        dispatchstatus.setText(getIntent().getStringExtra("dispatchstatus"));
+        dispatchstatus.setText(getIntent().getStringExtra("dispatchstatus").toUpperCase());
         if (Objects.requireNonNull(getIntent().getStringExtra("dispatchstatus")).equals("Pending")) {
-            dispatchstatus.setTextColor(Color.GREEN);
-            textdispatchstatus.setTextColor(Color.GREEN);
-        } else {
             dispatchstatus.setTextColor(Color.RED);
             textdispatchstatus.setTextColor(Color.RED);
+            framed.setBackgroundColor(Color.RED);
+        } else {
+            dispatchstatus.setTextColor(Color.GREEN);
+            textdispatchstatus.setTextColor(Color.GREEN);
+            framed.setBackgroundColor(Color.GREEN);
         }
         ownernumber.setText(getIntent().getStringExtra("ownernumber"));
         textownermail.setText(getIntent().getStringExtra("textownermail"));
@@ -131,10 +136,13 @@ public class SpecificOrder extends AppCompatActivity {
         textcountry.setText(getIntent().getStringExtra("textcountry"));
         textdeliveryplace.setText(getIntent().getStringExtra("textdeliveryplace"));
         textdeliverynumber.setText(getIntent().getStringExtra("textdeliverynumber"));
-        textdeliverycharges.setText(getIntent().getStringExtra("textdeliverycharges"));
+        String deliverycharges = "Ksh " + getIntent().getStringExtra("textdeliverycharges");
+        textdeliverycharges.setText(deliverycharges);
         textpaytype.setText(getIntent().getStringExtra("textpaytype"));
-        textpayamt.setText(getIntent().getStringExtra("textpayamt"));
-        textpayableamt.setText(getIntent().getStringExtra("textpayableamt"));
+        String payamt = "Ksh " + getIntent().getStringExtra("textpayamt");
+        textpayamt.setText(payamt);
+        String payableamt = "Ksh " + getIntent().getStringExtra("textpayableamt");
+        textpayableamt.setText(payableamt);
         textpaystatus.setText(getIntent().getStringExtra("textpaystatus"));
         textdispatchstatus.setText(getIntent().getStringExtra("dispatchstatus"));
         textpayref.setText(getIntent().getStringExtra("textpayref"));
@@ -183,18 +191,20 @@ public class SpecificOrder extends AppCompatActivity {
                             ord = me;
                             textdeliveryplace.setText(me.getDelivery_address());
                             textdeliverynumber.setText(String.valueOf(me.getDelivery_contact_phone_number()));
-                            String pending = "Pending";
-                            String dispatched = "Dispatched";
+                            String pending = ("Pending").toUpperCase();
+                            String dispatched = ("Dispatched").toUpperCase();
                             if (me.getDispatch_status() == 0) {
                                 textdispatchstatus.setText(pending);
-                                textdispatchstatus.setTextColor(Color.GREEN);
-                                dispatchstatus.setText(pending);
-                                dispatchstatus.setTextColor(Color.GREEN);
-                            } else {
-                                textdispatchstatus.setText(dispatched);
                                 textdispatchstatus.setTextColor(Color.RED);
-                                dispatchstatus.setText(dispatched);
+                                dispatchstatus.setText(pending);
+                                framed.setBackgroundColor(Color.RED);
                                 dispatchstatus.setTextColor(Color.RED);
+                            } else {
+                                framed.setBackgroundColor(Color.GREEN);
+                                textdispatchstatus.setText(dispatched);
+                                textdispatchstatus.setTextColor(Color.GREEN);
+                                dispatchstatus.setText(dispatched);
+                                dispatchstatus.setTextColor(Color.GREEN);
                             }
                             Log.d("response from api", me.getName());
                             String dispatchtime;

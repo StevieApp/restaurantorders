@@ -10,7 +10,7 @@
     <string name="orders">Orders</string>
     <string name="dispatchedorders">Dispatched Orders</string>
     <string name="status">Status:</string>
-    <string name="Pending">Pending</string>
+    <string name="Pending">PENDING</string>
     <string name="createdat">Created at:</string>
     <string name="image">image</string>
     <string name="createdattime">Time created</string>
@@ -66,4 +66,8 @@
     <string name="no_pending_orders">No Pending Orders</string>
     <string name="product_attribute">Product Attribute</string>
     <string name="attribute">attribute</string>
+    <string name="order_total">Order Total</string>
+    <string name="total">Total</string>
+    <string name="address">Address</string>
+    <string name="delivery_address">Delivery Address</string>
 </resources>

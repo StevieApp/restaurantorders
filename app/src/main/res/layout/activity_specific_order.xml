@@ -14,16 +14,24 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/framed"
+            android:background="#65B609"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:background="@drawable/chicken"
                 android:contentDescription="@string/image"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax" />-->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_marginEnd="1dp"
+                android:elevation="25dp"
+                android:orientation="horizontal" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
