@@ -91,9 +91,8 @@
                     android:layout_weight=".5"
                     android:gravity="end"
                     android:text="@string/orderdate" />
-
-
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout

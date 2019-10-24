@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/itemnumber" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/prodid" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -80,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/productname" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -100,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/attribute" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -120,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/item_quantity" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -140,6 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/itempricing" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -160,6 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/accompanimentid" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -180,6 +187,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/accompany" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -200,6 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:text="@string/itemdescription" />
+
         </LinearLayout>
 
     </LinearLayout>
