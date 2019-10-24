@@ -24,8 +24,8 @@
         android:layout_weight=".9"
         android:fontFamily="casual"
         android:gravity="center"
-        android:text="@string/myrestaurant"
+        android:text="@string/app_name"
         android:textColor="@android:color/white"
-        android:textSize="50sp" />
+        android:textSize="35sp" />
 
 </LinearLayout>
