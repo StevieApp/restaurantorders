@@ -24,7 +24,7 @@ public class OrderManipulation {
     private static Order singleorder;
 
     public static ArrayList<Order> getAllOrders(Context context) {
-        String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
+        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -48,8 +48,6 @@ public class OrderManipulation {
                             }.getType();
                             ArrayList<Order> orders = json.fromJson(rr.toString(), types);
                             allorders = orders;
-                            Order me = orders.get(1);
-                            Log.d("response from api", me.getName());
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
                             e.printStackTrace();
@@ -71,7 +69,7 @@ public class OrderManipulation {
     }
 
     public static Order getSingleOrder(Context context, Integer orderid) {
-        String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
                 + orderid.toString();
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
@@ -113,5 +111,64 @@ public class OrderManipulation {
         );
         requestQueue.add(objectRequest);
         return singleorder;
+    }
+
+    public void dispatch(Context context, int orderidd) {
+        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+                + orderidd;
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        System.out.println(jsonObject.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.e("error from api", volleyError.toString());
+                        System.out.println(volleyError.toString());
+                        Log.d("error from api", "onErrorResponse: \n"
+                                + volleyError.toString());
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
+
+    public void canceldispatch(Context context, int orderidd, Order o) {
+        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+                + orderidd;
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        JSONObject j = new JSONObject();
+        Gson gg = new Gson();
+        //j = gg.toJson(o);
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        System.out.println(jsonObject.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.e("error from api", volleyError.toString());
+                        System.out.println(volleyError.toString());
+                        Log.d("error from api", "onErrorResponse: \n"
+                                + volleyError.toString());
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
     }
 }

@@ -70,7 +70,7 @@ public class Orders extends Fragment {
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.show();
 
-        String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
+        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
         final RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
         availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
@@ -98,8 +98,6 @@ public class Orders extends Fragment {
                             if (orderss.size() == 0) {
                                 availability.setVisibility(getView().VISIBLE);
                             }
-                            Order me = orders.get(1);
-                            Log.d("response from api", me.getName());
                             progress.hide();
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");

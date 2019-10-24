@@ -154,7 +154,7 @@ public class SpecificOrder extends AppCompatActivity {
 
         String orderid = getIntent().getStringExtra("text");
         String orderidd = Objects.requireNonNull(orderid).replace("#", "");
-        String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
                 + orderidd;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         RecyclerView recyclerView = findViewById(R.id.recyclerviews);
@@ -264,7 +264,7 @@ public class SpecificOrder extends AppCompatActivity {
                                 String orderid = getIntent().getStringExtra("text");
                                 String orderidd = Objects.requireNonNull(orderid)
                                         .replace("#", "");
-                                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+                                String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
                                         + orderidd;
                                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -323,7 +323,7 @@ public class SpecificOrder extends AppCompatActivity {
                                 String orderid = getIntent().getStringExtra("text");
                                 String orderidd = Objects.requireNonNull(orderid)
                                         .replace("#", "");
-                                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
+                                String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/order?orderId="
                                         + orderidd;
                                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
