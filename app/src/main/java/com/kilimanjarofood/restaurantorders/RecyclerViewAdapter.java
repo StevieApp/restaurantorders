@@ -3,7 +3,6 @@ package com.kilimanjarofood.restaurantorders;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +15,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private final String TAG = "RecyclerViewAdapter";
     private ArrayList<Order> orderss;
     private Context mContext;
+    String ff = "";
 
 
     public RecyclerViewAdapter(Context context, ArrayList<Order> orders) {
@@ -42,18 +46,33 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "OnBindViewHolder: called.");
-        holder.orderdate.setText(orderss.get(position).getCreated_at());
+
+        Date d;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat sd = new SimpleDateFormat("hh:mm a yyyy/MM/dd");
+        String trh = orderss.get(position).getCreated_at();
+        sdf.setLenient(false);
+        try {
+            d = sdf.parse(trh);
+            holder.orderdate.setText(sd.format(d));
+        } catch (ParseException e) {
+            Log.d(TAG, e.getMessage());
+        }
         final String id = "#" + orderss.get(position).getId();
         String owner = "by " + orderss.get(position).getName();
         String disp = ("Dispatched").toUpperCase();
         String pend = ("Pending").toUpperCase();
         if (orderss.get(position).getDispatch_status() == 1) {
             holder.orderstatus.setText(disp);
-            holder.orderstatus.setTextColor(Color.GREEN);
-            holder.frame.setBackgroundColor(Color.GREEN);
+            holder.orderstatus.setTextColor(holder.itemView.getContext()
+                    .getResources().getColor(R.color.hound));
+            holder.frame.setBackgroundColor(holder.itemView.getContext()
+                    .getResources().getColor(R.color.hound));
         } else {
-            holder.orderstatus.setTextColor(Color.RED);
-            holder.frame.setBackgroundColor(Color.RED);
+            holder.orderstatus.setTextColor(holder.itemView.getContext()
+                    .getResources().getColor(R.color.colorAccent));
+            holder.frame.setBackgroundColor(holder.itemView.getContext()
+                    .getResources().getColor(R.color.colorAccent));
             holder.orderstatus.setText(pend);
         }
         holder.orderid.setText(id);
@@ -82,7 +101,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         + orderss.get(position).getMobile();
                 intent.putExtra("ownernumber", number);
                 intent.putExtra("textownermail", orderss.get(position).getEmail());
-                intent.putExtra("textcreateddate", orderss.get(position).getCreated_at());
+                Date du;
+                SimpleDateFormat sdfu = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                DateFormat sdu = new SimpleDateFormat("hh:mm a yyyy/MM/dd");
+                String trh = orderss.get(position).getCreated_at();
+                sdfu.setLenient(false);
+                try {
+                    du = sdfu.parse(trh);
+                    intent.putExtra("textcreateddate", sdu.format(du));
+                } catch (ParseException e) {
+                    Log.d(TAG, e.getMessage());
+                }
                 intent.putExtra("textcountry", orderss.get(position).getDelivery_country());
                 intent.putExtra("textdeliveryplace",
                         orderss.get(position).getDelivery_address());
@@ -119,7 +148,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 } else {
                     dispatchtime = orderss.get(position).getDispatch_time();
                 }
-                intent.putExtra("textdispatchdate", dispatchtime);
+                intent.putExtra("textdispatchdate", orderss.get(position).getDispatch_time());
                 mContext.startActivity(intent);
             }
         });

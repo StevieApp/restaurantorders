@@ -3,7 +3,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="orderdate">01–01–1997</string>
     <string name="orderid">#0001</string>
-    <string name="orderowner">by orderowner</string>
+    <string name="orderowner">Customer</string>
     <string name="img">mychicken</string>
     <string name="myrestaurant">MyRestaurant</string>
     <string name="orders">Orders</string>
@@ -54,7 +54,7 @@
     <string name="accompany">accompaniment</string>
     <string name="description">Description</string>
     <string name="itemdescription">itemdescription</string>
-    <string name="item">Item</string>
+    <string name="item">Item Number</string>
     <string name="itemnumber">itemnumber</string>
     <string name="product_id">Product ID</string>
     <string name="prodid">prodid</string>
@@ -69,4 +69,6 @@
     <string name="total">Total</string>
     <string name="address">Address</string>
     <string name="delivery_address">Delivery Address</string>
+    <string name="order_date">Order Date</string>
+    <string name="delivery_details">Delivery Details</string>
 </resources>

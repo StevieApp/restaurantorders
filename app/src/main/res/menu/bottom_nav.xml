@@ -5,11 +5,6 @@
     android:orientation="vertical">
 
     <item
-        android:id="@+id/allorders"
-        android:icon="@drawable/ic_orders_24dp"
-        android:title="@string/orders" />
-
-    <item
         android:id="@+id/pendingorders"
         android:icon="@drawable/ic_queue_black_24dp"
         android:title="@string/pendingorders" />
@@ -18,5 +13,10 @@
         android:id="@+id/dispatchedorders"
         android:icon="@drawable/ic_dispatched_24dp"
         android:title="@string/dispatchedorders" />
+
+    <item
+        android:id="@+id/allorders"
+        android:icon="@drawable/ic_orders_24dp"
+        android:title="@string/orders" />
 
 </menu>

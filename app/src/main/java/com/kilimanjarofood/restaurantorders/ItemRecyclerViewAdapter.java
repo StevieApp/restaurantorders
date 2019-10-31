@@ -38,7 +38,6 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "OnBindViewHolder: called.");
         holder.itemnumber.setText(String.valueOf(position + 1));
-        holder.productid.setText(String.valueOf(itemss.get(position).getProduct_id()));
         holder.itemname.setText(itemss.get(position).getProduct_name());
         if (itemss.get(position).getProducts_attribute_accompaniment() == null) {
             holder.accompany.setText("N/A");
@@ -58,12 +57,6 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             holder.itempricing.setText(price);
         }
         holder.quantity.setText(String.valueOf(itemss.get(position).getQuantity()));
-        if (String.valueOf(itemss.get(position).getAccompaniment_id()).equals("")) {
-            holder.accompanimentid.setText("N/A");
-        } else {
-            holder.accompanimentid.setText(String
-                    .valueOf(itemss.get(position).getAccompaniment_id()));
-        }
         if (itemss.get(position).getProduct_attrubute_size() == null ||
                 itemss.get(position).getProduct_attrubute_size().equals("")) {
             holder.attribute.setText("N/A");
@@ -99,8 +92,6 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             accompany = itemView.findViewById(R.id.accompany);
             description = itemView.findViewById(R.id.description);
             singleorderitem = itemView.findViewById(R.id.singleorderitem);
-            productid = itemView.findViewById(R.id.productid);
-            accompanimentid = itemView.findViewById(R.id.accompanimentid);
             attribute = itemView.findViewById(R.id.attribute);
         }
     }

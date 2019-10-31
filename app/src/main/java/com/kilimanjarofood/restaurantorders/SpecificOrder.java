@@ -34,7 +34,11 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class SpecificOrder extends AppCompatActivity {
@@ -97,9 +101,7 @@ public class SpecificOrder extends AppCompatActivity {
         ownername = findViewById(R.id.ownername);
         dispatchstatus = findViewById(R.id.dispatchstatus);
         ownernumber = findViewById(R.id.ownernumber);
-        textownermail = findViewById(R.id.textownermail);
         textcreateddate = findViewById(R.id.textcreateddate);
-        textcountry = findViewById(R.id.textcountry);
         textdeliveryplace = findViewById(R.id.textdeliveryplace);
         textdeliverynumber = findViewById(R.id.textdeliverynumber);
         textdeliverycharges = findViewById(R.id.textdeliverycharges);
@@ -128,14 +130,12 @@ public class SpecificOrder extends AppCompatActivity {
             textdispatchstatus.setTextColor(Color.RED);
             framed.setBackgroundColor(Color.RED);
         } else {
-            dispatchstatus.setTextColor(Color.GREEN);
-            textdispatchstatus.setTextColor(Color.GREEN);
-            framed.setBackgroundColor(Color.GREEN);
+            dispatchstatus.setTextColor(getResources().getColor(R.color.hound));
+            textdispatchstatus.setTextColor(getResources().getColor(R.color.hound));
+            framed.setBackgroundColor(getResources().getColor(R.color.hound));
         }
         ownernumber.setText(getIntent().getStringExtra("ownernumber"));
-        textownermail.setText(getIntent().getStringExtra("textownermail"));
         textcreateddate.setText(getIntent().getStringExtra("textcreateddate"));
-        textcountry.setText(getIntent().getStringExtra("textcountry"));
         textdeliveryplace.setText(getIntent().getStringExtra("textdeliveryplace"));
         textdeliverynumber.setText(getIntent().getStringExtra("textdeliverynumber"));
         String deliverycharges = "Ksh " + getIntent().getStringExtra("textdeliverycharges");
@@ -161,7 +161,7 @@ public class SpecificOrder extends AppCompatActivity {
         final ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(this, items);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL,
+                LinearLayoutManager.HORIZONTAL,
                 false));
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -197,16 +197,16 @@ public class SpecificOrder extends AppCompatActivity {
                             String dispatched = ("Dispatched").toUpperCase();
                             if (me.getDispatch_status() == 0) {
                                 textdispatchstatus.setText(pending);
-                                textdispatchstatus.setTextColor(Color.RED);
+                                textdispatchstatus.setTextColor(getResources().getColor(R.color.colorAccent));
                                 dispatchstatus.setText(pending);
-                                framed.setBackgroundColor(Color.RED);
-                                dispatchstatus.setTextColor(Color.RED);
+                                framed.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                dispatchstatus.setTextColor(getResources().getColor(R.color.colorAccent));
                             } else {
-                                framed.setBackgroundColor(Color.GREEN);
+                                framed.setBackgroundColor(getResources().getColor(R.color.hound));
                                 textdispatchstatus.setText(dispatched);
-                                textdispatchstatus.setTextColor(Color.GREEN);
+                                textdispatchstatus.setTextColor(getResources().getColor(R.color.hound));
                                 dispatchstatus.setText(dispatched);
-                                dispatchstatus.setTextColor(Color.GREEN);
+                                dispatchstatus.setTextColor(getResources().getColor(R.color.hound));
                             }
                             Log.d("response from api", me.getName());
                             String dispatchtime;
@@ -214,7 +214,17 @@ public class SpecificOrder extends AppCompatActivity {
                                 dispatchtime = "Pending dispatch/Dispatch time not set";
                                 textdispatchdate.setText(dispatchtime);
                             } else {
-                                textdispatchdate.setText(me.getDispatch_time());
+                                Date d;
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                DateFormat sd = new SimpleDateFormat("hh:mm a yyyy/MM/dd");
+                                String trh = me.getCreated_at();
+                                sdf.setLenient(false);
+                                try {
+                                    d = sdf.parse(trh);
+                                    textdispatchdate.setText(sd.format(d));
+                                } catch (ParseException e) {
+                                    Log.d(TAG, e.getMessage());
+                                }
                             }
                             if (me.getDispatch_status() == 0) {
                                 buttondispatch.setEnabled(true);
@@ -222,7 +232,7 @@ public class SpecificOrder extends AppCompatActivity {
                                 buttoncanceldispatch.setEnabled(true);
                             }
                             items.addAll(me.getCart());
-                            String Items = "Cart Items " + items.size();
+                            String Items = "Cart Items: " + items.size();
                             textcart.setText(Items);
                             progressDiag.hide();
                         } catch (JSONException e) {
