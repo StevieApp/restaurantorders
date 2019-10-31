@@ -77,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:textStyle="bold"
                 android:text="@string/item" />
 
             <TextView
@@ -98,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:textStyle="bold"
                 android:text="@string/product_attribute" />
 
             <TextView
@@ -119,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:textStyle="bold"
                 android:text="@string/quantity" />
 
             <TextView
@@ -140,6 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:textStyle="bold"
                 android:text="@string/item_price" />
 
             <TextView
@@ -161,6 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:textStyle="bold"
                 android:text="@string/description" />
 
             <TextView

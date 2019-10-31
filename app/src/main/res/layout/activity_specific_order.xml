@@ -206,6 +206,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
                         android:text="@string/createdat"
+                        android:textStyle="bold"
                         android:textSize="14sp" />
 
                     <TextView
@@ -230,6 +231,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/deliveredat"
                         android:textSize="14sp" />
 
@@ -255,6 +257,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/deliverycontact"
                         android:textSize="14sp" />
 
@@ -280,6 +283,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/paymenttype"
                         android:textSize="14sp" />
 
@@ -305,6 +309,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/paidamount"
                         android:textSize="14sp" />
 
@@ -330,6 +335,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/payableamount"
                         android:textSize="14sp" />
 
@@ -355,6 +361,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/paymentstatus"
                         android:textSize="14sp" />
 
@@ -380,6 +387,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/delivery_charge"
                         android:textSize="14sp" />
 
@@ -405,6 +413,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/dispatch_status"
                         android:textSize="14sp" />
 
@@ -430,6 +439,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/payment_reference"
                         android:textSize="14sp" />
 
@@ -456,6 +466,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
                         android:text="@string/payment_number"
+                        android:textStyle="bold"
                         android:textSize="14sp" />
 
                     <TextView
@@ -480,6 +491,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
+                        android:textStyle="bold"
                         android:text="@string/dispatch_date"
                         android:textSize="14sp" />
 
