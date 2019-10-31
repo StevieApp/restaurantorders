@@ -99,7 +99,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("dispatchstatus", dispatchstatus);
                 String number = "+" + orderss.get(position).getCountry_code()
                         + orderss.get(position).getMobile();
-                intent.putExtra("ownernumber", number);
+                if (orderss.get(position).getMobile() == null ||
+                        orderss.get(position).getMobile().isEmpty() ||
+                        orderss.get(position).getMobile().equals("")) {
+                    intent.putExtra("ownernumber", "Phone Number: N/A");
+                } else {
+                    intent.putExtra("ownernumber", number);
+                }
                 intent.putExtra("textownermail", orderss.get(position).getEmail());
                 Date du;
                 SimpleDateFormat sdfu = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -148,7 +154,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 } else {
                     dispatchtime = orderss.get(position).getDispatch_time();
                 }
-                intent.putExtra("textdispatchdate", orderss.get(position).getDispatch_time());
+                intent.putExtra("textdispatchdate", dispatchtime);
                 mContext.startActivity(intent);
             }
         });
