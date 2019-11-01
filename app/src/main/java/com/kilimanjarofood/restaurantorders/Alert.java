@@ -6,6 +6,9 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Alert extends Service {
 
     @Override
@@ -24,6 +27,24 @@ public class Alert extends Service {
     private void startForeground() {
         Toast.makeText(this, "boom", Toast.LENGTH_SHORT).show();
         Log.d("loobing", "loobing");
-        
+        Timer timer = new Timer();
+        //Set the schedule function
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                stopService();
+                startService();
+            }
+        }, 5000, 600000000);
+        Toast.makeText(this, "booming", Toast.LENGTH_SHORT).show();
+    }
+
+    public void startService() {
+        startService(new Intent(this, Alert.class));
+    }
+
+    public void stopService() {
+        stopService(new Intent(this, Alert.class));
     }
 }
