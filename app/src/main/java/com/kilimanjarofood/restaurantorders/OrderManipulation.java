@@ -20,11 +20,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class OrderManipulation {
-    private static ArrayList<Order> allorders;
+    private static ArrayList<Order> allorders = new ArrayList<>();
     private static Order singleorder;
 
     public static ArrayList<Order> getAllOrders(Context context) {
-        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
+        String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -47,7 +47,7 @@ public class OrderManipulation {
                             Type types = new TypeToken<ArrayList<Order>>() {
                             }.getType();
                             ArrayList<Order> orders = json.fromJson(rr.toString(), types);
-                            allorders = orders;
+                            allorders.addAll(orders);
                         } catch (JSONException e) {
                             Log.d("response from api", "paaaapiiii");
                             e.printStackTrace();
