@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.kilimanjarofood.restaurantorders">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <dist:module dist:instant="true" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:name=".Alerting"
         android:allowBackup="true"
         android:icon="@drawable/chicken"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kilimanjarofood.restaurantorders.SpecificOrder" />
-        <activity android:name="com.kilimanjarofood.restaurantorders.Viewing" />
+
+        <service
+            android:name=".Alert"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".SpecificOrder" />
+        <activity android:name=".Viewing" />
         <activity
-            android:name="com.kilimanjarofood.restaurantorders.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
