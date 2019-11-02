@@ -1,6 +1,7 @@
 package com.kilimanjarofood.restaurantorders;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -186,10 +187,14 @@ public class MainActivity extends AppCompatActivity {
                                                     .setContentIntent(pendingIntent)
                                                     .setAutoCancel(true);
 
+                                            Notification note = builder.build();
+                                            note.defaults |= Notification.DEFAULT_VIBRATE;
+                                            note.defaults |= Notification.DEFAULT_SOUND;
+
                                             NotificationManagerCompat notificationManager =
                                                     NotificationManagerCompat.from(MainActivity.this);
                                             // notificationId is a unique int for each notification that you must define
-                                            notificationManager.notify(NOTIF_ID, builder.build());
+                                            notificationManager.notify(NOTIF_ID, note);
                                         }
                                     } else if (nou.size() != 0) {
                                         editor.putString("size", String.valueOf(nou.size()));
