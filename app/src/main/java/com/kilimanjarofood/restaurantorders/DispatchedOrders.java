@@ -38,6 +38,7 @@ public class DispatchedOrders extends Fragment {
 
     private ArrayList<Order> orderss = new ArrayList<>();
     private TextView availability;
+    ProgressDialog progress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class DispatchedOrders extends Fragment {
         nu.setStackFromEnd(true);
         recyclerView.setLayoutManager(nu);
 
-        final ProgressDialog progress = new ProgressDialog(getActivity());
+        progress = new ProgressDialog(getActivity());
         progress.setMessage("Getting Dispatched Orders...");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.show();
@@ -129,6 +130,18 @@ public class DispatchedOrders extends Fragment {
                     }
                 });
         requestQueue.add(objectRequest);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        progress.dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        progress.dismiss();
     }
 
 }

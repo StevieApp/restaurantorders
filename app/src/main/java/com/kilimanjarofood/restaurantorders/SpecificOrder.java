@@ -67,6 +67,7 @@ public class SpecificOrder extends AppCompatActivity {
     MaterialButton buttondispatch, buttoncanceldispatch;
     Order ord;
     ArrayList<OrderItem> items = new ArrayList<>();
+    ProgressDialog progressDiag, progressDialog;
 
     boolean isConnected = true;
     String TAG = "Networking ME:";
@@ -164,10 +165,10 @@ public class SpecificOrder extends AppCompatActivity {
                 LinearLayoutManager.HORIZONTAL,
                 false));
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
-        final ProgressDialog progressDiag = new ProgressDialog(this);
+        progressDiag = new ProgressDialog(this);
         progressDiag.setMessage("Getting Cart Items...");
         progressDiag.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDiag.show();
@@ -389,7 +390,18 @@ public class SpecificOrder extends AppCompatActivity {
             Objects.requireNonNull(connectivityManager).unregisterNetworkCallback(connectivityCallback);
             monitoringConnectivity = false;
         }
+
+        progressDiag.dismiss();
+        progressDialog.dismiss();
+
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        progressDiag.dismiss();
+        progressDialog.dismiss();
     }
 
     // Method to check network connectivity in Main Activity

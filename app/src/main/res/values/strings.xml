@@ -71,4 +71,6 @@
     <string name="delivery_address">Delivery Address:</string>
     <string name="order_date">Order Date:</string>
     <string name="delivery_details">Delivery Details:</string>
+    <string name="accept">Accept</string>
+    <string name="new_orders">New Orders</string>
 </resources>

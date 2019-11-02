@@ -1,6 +1,7 @@
 package com.kilimanjarofood.restaurantorders;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -9,6 +10,10 @@ import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +22,11 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Viewing extends AppCompatActivity {
 
@@ -25,6 +34,17 @@ public class Viewing extends AppCompatActivity {
     // to check if we are connected to Network
     boolean isConnected = true;
     String TAG = "Networking ME:";
+    ArrayList<Order> getAllOrders = new ArrayList<>();
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    HashSet<String> nou = new HashSet();
+    String CHANNEL_ID = "Channel_Id";
+    int NOTIF_ID = 1;
+    Timer timer;
+    RelativeLayout rel;
+    TextView neworder;
+    Button lim;
+
     private ConnectivityManager.NetworkCallback connectivityCallback
             = new ConnectivityManager.NetworkCallback() {
         @Override
@@ -94,9 +114,61 @@ public class Viewing extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        pref = getSharedPreferences("my prefa", Context.MODE_PRIVATE);
+        editor = pref.edit();
+
+        rel = findViewById(R.id.rel);
+        neworder = findViewById(R.id.neworder);
+        lim = findViewById(R.id.lim);
+
+
         setContentView(R.layout.activity_viewing);
         BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
         bottom_nav.setOnNavigationItemSelectedListener(newListener);
+        startForeground();
+    }
+
+    private void startForeground() {
+        rel = findViewById(R.id.rel);
+        neworder = findViewById(R.id.neworder);
+        lim = findViewById(R.id.lim);
+        timer = new Timer();
+        //Set the schedule function
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                startForeground();
+                if (pref.getString("newsize", null) != null) {
+                    if (Integer.parseInt(pref.getString("newsize", null)) >
+                            Integer.parseInt(pref.getString("size", null))) {
+                        final int g = Integer.parseInt(pref.getString("newsize", null)) -
+                                Integer.parseInt(pref.getString("size", null));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                rel.setVisibility(View.VISIBLE);
+                                neworder.setText("New Orders: " + g);
+                                lim.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Toast.makeText(Viewing.this, "Attending...",
+                                                Toast.LENGTH_LONG).show();
+                                        editor.putString("size", null);
+                                        editor.putString("size", pref.getString("newsize", null));
+                                        editor.commit();
+                                        editor.putString("newsize", null);
+                                        editor.commit();
+                                        rel.setVisibility(View.GONE);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    Log.d("ggggggggg", "gggggggggggg");
+                }
+            }
+        }, 5000, 999999999);
     }
 
     @Override
@@ -104,6 +176,7 @@ public class Viewing extends AppCompatActivity {
         super.onResume();
         checkConnectivity();
 
+        rel.setVisibility(View.GONE);
         BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
         bottom_nav.setOnNavigationItemSelectedListener(newListener);
         if (bottom_nav.getSelectedItemId() == R.id.allorders) {

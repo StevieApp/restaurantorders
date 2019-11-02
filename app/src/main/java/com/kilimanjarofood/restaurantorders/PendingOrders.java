@@ -36,6 +36,7 @@ public class PendingOrders extends Fragment {
 
     private ArrayList<Order> orderss = new ArrayList<>();
     private TextView availability;
+    ProgressDialog progress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class PendingOrders extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
         availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 
-        final ProgressDialog progress = new ProgressDialog(getActivity());
+        progress = new ProgressDialog(getActivity());
         progress.setMessage("Getting Pending Orders...");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.show();
@@ -121,5 +122,17 @@ public class PendingOrders extends Fragment {
                     }
                 });
         requestQueue.add(objectRequest);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        progress.dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        progress.dismiss();
     }
 }
