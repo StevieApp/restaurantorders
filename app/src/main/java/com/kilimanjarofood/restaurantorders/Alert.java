@@ -69,7 +69,7 @@ public class Alert extends Service {
             public void run() {
                 //stopService();
                 startService();
-                String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
+                String url = "https://demo.kilimanjarofood.co.ke/api/v1/dispatch/orders";
                 RequestQueue requestQueue = Volley.newRequestQueue(Alert.this);
 
                 JsonObjectRequest objectRequest = new JsonObjectRequest(
