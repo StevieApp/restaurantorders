@@ -1,23 +1,52 @@
 package com.kilimanjarofood.restaurantorders;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    String CHANNEL_ID = "Channel_Id";
     int i = 0;
     // to check if we are connected to Network
     boolean isConnected = true;
@@ -62,12 +91,150 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "INTERNET LOST");
         }
     };
+    ArrayList<Order> getAllOrders = new ArrayList<>();
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    HashSet<String> nou = new HashSet();
+    int NOTIF_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         checkConnectivity();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pref = getSharedPreferences("my prefa", Context.MODE_PRIVATE);
+        editor = pref.edit();
+        Toast.makeText(this, pref.getString("size", null), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, pref.getString("newsize", null), Toast.LENGTH_SHORT).show();
+        createNotificationChannel();
+        startForeground();
+    }
+
+    private void startForeground() {
+        final Timer timer = new Timer();
+        getAllOrders.clear();
+        //Set the schedule function
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                startForeground();
+                String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
+                RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+
+                JsonObjectRequest objectRequest = new JsonObjectRequest(
+                        Request.Method.GET,
+                        url,
+                        null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject jsonObject) {
+                                Log.e("response from api", jsonObject.toString());
+                                System.out.println(jsonObject.toString());
+                                Log.d("response from api", "onResponse: \n"
+                                        + jsonObject.toString());
+                                try {
+                                    JSONObject j = jsonObject.getJSONObject("data");
+                                    Log.d("response from api", j.toString());
+                                    JSONArray rr = j.getJSONArray("orders");
+                                    Log.d("response from api", rr.toString());
+                                    Gson json = new Gson();
+                                    Type types = new TypeToken<ArrayList<Order>>() {
+                                    }.getType();
+                                    ArrayList<Order> orders = json.fromJson(rr.toString(), types);
+                                    getAllOrders.clear();
+                                    getAllOrders.addAll(orders);
+
+                                    for (int g = 0; g < getAllOrders.size(); g++) {
+                                        nou.add(String.valueOf(getAllOrders.get(g).getId()));
+                                    }
+
+                                    if (pref.getString("size", null) == null) {
+                                        editor.putString("size", String.valueOf(0));
+                                        editor.commit();
+                                    }
+                                    if (Integer.parseInt(pref.getString("size", null)) > 0
+                                            && nou.size() != 0) {
+                                        editor.putString("newsize", String.valueOf(nou.size()));
+                                        editor.commit();
+                                        if (Integer.parseInt(pref.getString("size", null))
+                                                < nou.size()) {
+                                            Intent intent = new Intent(MainActivity.this,
+                                                    Viewing.class);
+
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            PendingIntent pendingIntent = PendingIntent
+                                                    .getActivity(MainActivity.this,
+                                                            0, intent, 0);
+
+                                            NotificationCompat.Builder builder = new NotificationCompat
+                                                    .Builder(MainActivity.this, CHANNEL_ID)
+                                                    .setSmallIcon(R.drawable.chicken)
+                                                    .setColor(getResources().getColor(R.color.hound))
+                                                    .setContentTitle("New Order(s): " + (nou.size()
+                                                            - Integer.parseInt(pref
+                                                            .getString("size", null))))
+
+                                                    .setContentText("Needs attention!!!")
+                                                    .setStyle(new NotificationCompat.BigTextStyle()
+                                                            .bigText("Needs attention!!!"))
+                                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                                    .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
+                                                            + "://" + MainActivity.this.getBaseContext()
+                                                            .getPackageName() + "/" + R.raw.alarm))
+                                                    .setVibrate(new long[]{5000, 5000})
+                                                    .setContentIntent(pendingIntent)
+                                                    .setAutoCancel(true);
+
+                                            NotificationManagerCompat notificationManager =
+                                                    NotificationManagerCompat.from(MainActivity.this);
+                                            // notificationId is a unique int for each notification that you must define
+                                            notificationManager.notify(NOTIF_ID, builder.build());
+                                        }
+                                    } else if (nou.size() != 0) {
+                                        editor.putString("size", String.valueOf(nou.size()));
+                                        editor.commit();
+                                    } else {
+                                        Calendar cal = Calendar.getInstance();
+                                        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                                        //alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 30*1000, pendingIntent);
+                                    }
+
+                                } catch (JSONException e) {
+                                    Log.d("response from api", "paaaapiiii");
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                Log.e("error from api", volleyError.toString());
+                                System.out.println(volleyError.toString());
+                                Log.d("error from api", "onErrorResponse: \n"
+                                        + volleyError.toString());
+                            }
+                        }
+                );
+                requestQueue.add(objectRequest);
+            }
+        }, 5000, 999999999);
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.delivery_charge);
+            String description = getString(R.string.deliverycharge);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     @Override
@@ -86,6 +253,11 @@ public class MainActivity extends AppCompatActivity {
             monitoringConnectivity = false;
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     // Method to check network connectivity in Main Activity

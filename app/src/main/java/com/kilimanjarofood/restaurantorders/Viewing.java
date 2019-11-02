@@ -221,6 +221,11 @@ public class Viewing extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     // Method to check network connectivity in Main Activity
     private void checkConnectivity() {
         // here we are getting the connectivity service from connectivity manager

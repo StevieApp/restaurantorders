@@ -393,7 +393,6 @@ public class SpecificOrder extends AppCompatActivity {
 
         progressDiag.dismiss();
         progressDialog.dismiss();
-
         super.onPause();
     }
 
