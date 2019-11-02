@@ -105,8 +105,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pref = getSharedPreferences("my prefa", Context.MODE_PRIVATE);
         editor = pref.edit();
-        Toast.makeText(this, pref.getString("size", null), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, pref.getString("newsize", null), Toast.LENGTH_SHORT).show();
         createNotificationChannel();
         startForeground();
     }
