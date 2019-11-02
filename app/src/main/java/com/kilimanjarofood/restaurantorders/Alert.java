@@ -55,7 +55,6 @@ public class Alert extends Service {
         editor = pref.edit();
 
         startForeground();
-
         return super.onStartCommand(intent, flags, startId);
     }
 
