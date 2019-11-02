@@ -79,7 +79,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String total = "Ksh " + orderss.get(position).getTotal();
         holder.ordertotal.setText(total);
         String add = orderss.get(position).getDelivery_address();
-        String addlittle = add.substring(0, add.indexOf(","));
         holder.deliveryadd.setText(add);
         holder.orderowner.setText(owner);
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
