@@ -160,6 +160,18 @@ public class Viewing extends AppCompatActivity {
                                         editor.putString("newsize", null);
                                         editor.commit();
                                         rel.setVisibility(View.GONE);
+                                        BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
+                                        bottom_nav.setOnNavigationItemSelectedListener(newListener);
+                                        if (bottom_nav.getSelectedItemId() == R.id.allorders) {
+                                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
+                                                    new Orders()).commit();
+                                        } else if (bottom_nav.getSelectedItemId() == R.id.dispatchedorders) {
+                                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
+                                                    new DispatchedOrders()).commit();
+                                        } else if (bottom_nav.getSelectedItemId() == R.id.pendingorders) {
+                                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_area,
+                                                    new PendingOrders()).commit();
+                                        }
                                     }
                                 });
                             }
