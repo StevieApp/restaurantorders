@@ -142,15 +142,17 @@ public class MainActivity extends AppCompatActivity {
                                     ArrayList<Order> orders = json.fromJson(rr.toString(), types);
                                     getAllOrders.clear();
                                     getAllOrders.addAll(orders);
-
+                                    
                                     for (int g = 0; g < getAllOrders.size(); g++) {
                                         nou.add(String.valueOf(getAllOrders.get(g).getId()));
                                     }
 
                                     if (pref.getString("size", null) == null) {
                                         editor.putString("size", String.valueOf(0));
+                                        editor.putString("newsize", String.valueOf(0));
                                         editor.commit();
                                     }
+
                                     if (Integer.parseInt(pref.getString("size", null)) > 0
                                             && nou.size() != 0) {
                                         editor.putString("newsize", String.valueOf(nou.size()));
