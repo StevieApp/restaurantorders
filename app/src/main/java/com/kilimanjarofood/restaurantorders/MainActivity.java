@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     HashSet<String> nou = new HashSet();
     int NOTIF_ID = 1;
+    double pInfiniteDouble = Double.POSITIVE_INFINITY;
+    long duration = (long) pInfiniteDouble;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,17 +108,23 @@ public class MainActivity extends AppCompatActivity {
         pref = getSharedPreferences("my prefa", Context.MODE_PRIVATE);
         editor = pref.edit();
         createNotificationChannel();
-        startForeground();
+        startForeground(duration);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("notif", "notif", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
     }
 
-    private void startForeground() {
+    private void startForeground(long dur) {
         final Timer timer = new Timer();
         getAllOrders.clear();
         //Set the schedule function
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                startForeground();
+                startForeground(duration);
                 String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
                 RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
@@ -223,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                 );
                 requestQueue.add(objectRequest);
             }
-        }, 5000, 999999999);
+        }, 5000, (long) pInfiniteDouble);
     }
 
     private void createNotificationChannel() {
