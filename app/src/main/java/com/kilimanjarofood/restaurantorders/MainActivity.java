@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                                                     .setContentText("Needs attention!!!")
                                                     .setStyle(new NotificationCompat.BigTextStyle()
                                                             .bigText("Needs attention!!!"))
-                                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                                                     .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
                                                             + "://" + MainActivity.this.getBaseContext()
                                                             .getPackageName() + "/" + R.raw.alarm))

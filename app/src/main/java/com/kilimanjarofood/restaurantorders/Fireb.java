@@ -48,6 +48,7 @@ public class Fireb extends FirebaseMessagingService {
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(bee).bigLargeIcon(bee).setBigContentTitle("Kilimanjaro Food")
                         .setSummaryText("New Order Received!"))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 //.setLargeIcon(bee)
                 .setContentText(message)
