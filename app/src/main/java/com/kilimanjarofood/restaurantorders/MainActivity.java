@@ -9,6 +9,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -37,7 +39,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     String CHANNEL_ID = "Channel_Id";
     int i = 0;
+    Bitmap bee;
     // to check if we are connected to Network
     boolean isConnected = true;
     String TAG = "Networking ME:";
@@ -114,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-
     }
 
     private void startForeground(long dur) {
@@ -178,12 +183,14 @@ public class MainActivity extends AppCompatActivity {
 
                                             NotificationCompat.Builder builder = new NotificationCompat
                                                     .Builder(MainActivity.this, CHANNEL_ID)
-                                                    .setSmallIcon(R.drawable.chicken)
+                                                    .setSmallIcon(R.mipmap.chicken)
                                                     .setColor(getResources().getColor(R.color.hound))
                                                     .setContentTitle("New Order(s): " + (nou.size()
                                                             - Integer.parseInt(pref
                                                             .getString("size", null))))
-
+                                                    .setStyle(new NotificationCompat.BigPictureStyle()
+                                                            .bigPicture(bee).bigLargeIcon(bee).setBigContentTitle("Kilimanjaro Food")
+                                                            .setSummaryText("New Order Received!"))
                                                     .setContentText("Needs attention!!!")
                                                     .setStyle(new NotificationCompat.BigTextStyle()
                                                             .bigText("Needs attention!!!"))
@@ -193,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                                                             .getPackageName() + "/" + R.raw.alarm))
                                                     .setVibrate(new long[]{5000, 5000})
                                                     .setContentIntent(pendingIntent)
+                                                    .setLargeIcon(bee)
                                                     .setAutoCancel(true);
 
                                             Notification note = builder.build();
@@ -254,6 +262,24 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         checkConnectivity();
+    }
+
+    public Bitmap getBitmapfromUrl(String imageUrl) {
+        try {
+            URL url = new URL(imageUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap bitmap = BitmapFactory.decodeStream(input);
+            return bitmap;
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+
+        }
     }
 
     @Override
