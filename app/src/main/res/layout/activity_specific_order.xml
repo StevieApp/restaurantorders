@@ -45,8 +45,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/Widget.AppCompat.PopupMenu.Overflow"
+                android:layout_height="wrap_content"
                 app:title="@string/orderid"
                 app:titleTextColor="@android:color/white" />
 
@@ -146,19 +145,22 @@
                     android:id="@+id/cart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="100dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="100dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textcart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:text="@string/cart"
                         android:textSize="22sp"
                         android:textStyle="bold" />
+
+                    <view
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"></view>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -175,21 +177,24 @@
 
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginStart="100dp"
-                    android:layout_marginEnd="100dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:text="@string/delivery_details"
                         android:textSize="22sp"
                         android:textStyle="bold" />
+
+                    <view
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"></view>
 
                 </LinearLayout>
 
@@ -206,8 +211,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
                         android:text="@string/createdat"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textcreateddate"
@@ -231,9 +236,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
-                        android:textStyle="bold"
                         android:text="@string/deliveredat"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textdeliveryplace"
@@ -257,9 +262,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".6"
-                        android:textStyle="bold"
                         android:text="@string/deliverycontact"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textdeliverynumber"
@@ -270,6 +275,79 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dispatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dispatchedstatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:text="@string/dispatch_status"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textdispatchstatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:text="@string/dispatchstatus"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dispatchdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textdispatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:text="@string/dispatch_date"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textdispatchdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:text="@string/dispatch_time"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Payment Details:"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <view
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"></view>
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/paymenttype"
@@ -401,31 +479,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/dispatch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/dispatchedstatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".6"
-                        android:textStyle="bold"
-                        android:text="@string/dispatch_status"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/textdispatchstatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".4"
-                        android:text="@string/dispatchstatus"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/payreference"
@@ -475,32 +528,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".4"
                         android:text="@string/pay_no"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/dispatchdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textdispatch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".6"
-                        android:textStyle="bold"
-                        android:text="@string/dispatch_date"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/textdispatchdate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".4"
-                        android:text="@string/dispatch_time"
                         android:textSize="14sp" />
 
                 </LinearLayout>

@@ -71,7 +71,7 @@ public class Orders extends Fragment {
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.show();
 
-        String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
+        String url = "https://demo. kilimanjarofood.co.ke/api/v1/dispatch/orders";
         final RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
         availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
 

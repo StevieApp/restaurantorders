@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
@@ -44,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Log.d(TAG, "OnBindViewHolder: called.");
 
         Date d;
@@ -68,12 +69,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     .getResources().getColor(R.color.hound));
             holder.frame.setBackgroundColor(holder.itemView.getContext()
                     .getResources().getColor(R.color.hound));
+            holder.statusbg.setCardBackgroundColor(holder.itemView.getContext()
+                    .getResources().getColor(R.color.hound));
         } else {
             holder.orderstatus.setTextColor(holder.itemView.getContext()
                     .getResources().getColor(R.color.colorAccent));
             holder.frame.setBackgroundColor(holder.itemView.getContext()
                     .getResources().getColor(R.color.colorAccent));
             holder.orderstatus.setText(pend);
+            holder.statusbg.setCardBackgroundColor(holder.itemView.getContext()
+                    .getResources().getColor(R.color.colorAccent));
         }
         holder.orderid.setText(id);
         String total = "Ksh " + orderss.get(position).getTotal();
@@ -174,6 +179,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 deliveryadd;
         FrameLayout frame;
         LinearLayout parentLayout;
+        CardView statusbg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -185,6 +191,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             frame = itemView.findViewById(R.id.frame);
             ordertotal = itemView.findViewById(R.id.ordertotal);
             deliveryadd = itemView.findViewById(R.id.deliveryadd);
+            statusbg = itemView.findViewById(R.id.statusbg);
         }
     }
 }
