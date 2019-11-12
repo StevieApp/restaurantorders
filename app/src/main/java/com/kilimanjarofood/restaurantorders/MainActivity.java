@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +15,6 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -195,10 +193,6 @@ public class MainActivity extends AppCompatActivity {
                                                     .setStyle(new NotificationCompat.BigTextStyle()
                                                             .bigText("Needs attention!!!"))
                                                     .setPriority(NotificationCompat.PRIORITY_HIGH)
-                                                    .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE
-                                                            + "://" + MainActivity.this.getBaseContext()
-                                                            .getPackageName() + "/" + R.raw.alarm))
-                                                    .setVibrate(new long[]{5000, 5000})
                                                     .setContentIntent(pendingIntent)
                                                     .setLargeIcon(bee)
                                                     .setAutoCancel(true);
@@ -239,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 );
                 requestQueue.add(objectRequest);
             }
-        }, 5000, (long) pInfiniteDouble);
+        }, 30000, (long) pInfiniteDouble);
     }
 
     private void createNotificationChannel() {

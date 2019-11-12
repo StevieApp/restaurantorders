@@ -201,7 +201,7 @@ public class SpecificOrder extends AppCompatActivity {
                                 textdispatchstatus.setTextColor(getResources().getColor(R.color.colorAccent));
                                 dispatchstatus.setText(pending);
                                 framed.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                                dispatchstatus.setTextColor(getResources().getColor(R.color.colorAccent));
+                                dispatchstatus.setTextColor(Color.RED);
                             } else {
                                 framed.setBackgroundColor(getResources().getColor(R.color.hound));
                                 textdispatchstatus.setText(dispatched);

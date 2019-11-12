@@ -124,7 +124,7 @@ public class DispatchedOrders extends Fragment {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
-                        Toast.makeText(getActivity(), "Unable to load orders",
+                        Toast.makeText(getContext(), "Unable to load orders",
                                 Toast.LENGTH_SHORT).show();
                         progress.hide();
                     }
