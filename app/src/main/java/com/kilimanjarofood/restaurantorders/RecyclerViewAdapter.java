@@ -64,21 +64,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String disp = ("Dispatched").toUpperCase();
         String pend = ("Pending").toUpperCase();
         if (orderss.get(position).getDispatch_status() == 1) {
-            holder.orderstatus.setText(disp);
-            holder.orderstatus.setTextColor(holder.itemView.getContext()
-                    .getResources().getColor(R.color.hound));
             holder.frame.setBackgroundColor(holder.itemView.getContext()
                     .getResources().getColor(R.color.hound));
-            holder.statusbg.setCardBackgroundColor(holder.itemView.getContext()
-                    .getResources().getColor(R.color.hound));
+            holder.statusbgd.setVisibility(View.VISIBLE);
+            holder.statusbg.setVisibility(View.GONE);
         } else {
-            holder.orderstatus.setTextColor(holder.itemView.getContext()
-                    .getResources().getColor(R.color.colorAccent));
             holder.frame.setBackgroundColor(holder.itemView.getContext()
                     .getResources().getColor(R.color.colorAccent));
-            holder.orderstatus.setText(pend);
-            holder.statusbg.setCardBackgroundColor(holder.itemView.getContext()
-                    .getResources().getColor(R.color.colorAccent));
+            holder.statusbgd.setVisibility(View.GONE);
+            holder.statusbg.setVisibility(View.VISIBLE);
         }
         holder.orderid.setText(id);
         String total = "Ksh " + orderss.get(position).getTotal();
@@ -179,7 +173,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 deliveryadd;
         FrameLayout frame;
         LinearLayout parentLayout;
-        CardView statusbg;
+        CardView statusbg,
+                statusbgd;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -192,6 +187,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ordertotal = itemView.findViewById(R.id.ordertotal);
             deliveryadd = itemView.findViewById(R.id.deliveryadd);
             statusbg = itemView.findViewById(R.id.statusbg);
+            statusbgd = itemView.findViewById(R.id.statusbgd);
         }
     }
 }

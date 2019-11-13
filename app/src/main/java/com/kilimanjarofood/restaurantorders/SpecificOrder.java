@@ -12,12 +12,14 @@ import android.net.NetworkRequest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +29,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 
@@ -45,7 +46,6 @@ public class SpecificOrder extends AppCompatActivity {
 
     TextView specificorderid,
             ownername,
-            dispatchstatus,
             ownernumber,
             textownermail,
             textcreateddate,
@@ -61,9 +61,12 @@ public class SpecificOrder extends AppCompatActivity {
             textpayref,
             textpayno,
             textdispatchdate,
+            ownermail,
             textcart;
     Toolbar toolbar;
-    CollapsingToolbarLayout framed;
+    CardView statusbg,
+            statusbgd;
+    FrameLayout framed;
     MaterialButton buttondispatch, buttoncanceldispatch;
     Order ord;
     ArrayList<OrderItem> items = new ArrayList<>();
@@ -100,7 +103,6 @@ public class SpecificOrder extends AppCompatActivity {
         specificorderid = findViewById(R.id.specificorderid);
         toolbar = findViewById(R.id.toolbar);
         ownername = findViewById(R.id.ownername);
-        dispatchstatus = findViewById(R.id.dispatchstatus);
         ownernumber = findViewById(R.id.ownernumber);
         textcreateddate = findViewById(R.id.textcreateddate);
         textdeliveryplace = findViewById(R.id.textdeliveryplace);
@@ -118,6 +120,9 @@ public class SpecificOrder extends AppCompatActivity {
         buttoncanceldispatch = findViewById(R.id.buttoncanceldispatch);
         textcart = findViewById(R.id.textcart);
         framed = findViewById(R.id.framed);
+        statusbg = findViewById(R.id.statusbg);
+        statusbgd = findViewById(R.id.statusbgd);
+        ownermail = findViewById(R.id.ownermail);
 
         buttondispatch.setEnabled(false);
         buttoncanceldispatch.setEnabled(false);
@@ -125,16 +130,18 @@ public class SpecificOrder extends AppCompatActivity {
         specificorderid.setText(getIntent().getStringExtra("text"));
         toolbar.setTitle(getIntent().getStringExtra("text"));
         ownername.setText(getIntent().getStringExtra("ownername"));
-        dispatchstatus.setText(getIntent().getStringExtra("dispatchstatus").toUpperCase());
         if (Objects.requireNonNull(getIntent().getStringExtra("dispatchstatus")).equals("Pending")) {
-            dispatchstatus.setTextColor(Color.RED);
             textdispatchstatus.setTextColor(Color.RED);
-            framed.setBackgroundColor(Color.RED);
+            statusbgd.setVisibility(View.GONE);
+            statusbg.setVisibility(View.VISIBLE);
+            //framed.setBackgroundColor(Color.RED);
         } else {
-            dispatchstatus.setTextColor(getResources().getColor(R.color.hound));
+            statusbgd.setVisibility(View.VISIBLE);
+            statusbg.setVisibility(View.GONE);
             textdispatchstatus.setTextColor(getResources().getColor(R.color.hound));
-            framed.setBackgroundColor(getResources().getColor(R.color.hound));
+            //framed.setBackgroundColor(getResources().getColor(R.color.hound));
         }
+        ownermail.setText(getIntent().getStringExtra("textownermail"));
         ownernumber.setText(getIntent().getStringExtra("ownernumber"));
         textcreateddate.setText(getIntent().getStringExtra("textcreateddate"));
         textdeliveryplace.setText(getIntent().getStringExtra("textdeliveryplace"));
@@ -199,15 +206,11 @@ public class SpecificOrder extends AppCompatActivity {
                             if (me.getDispatch_status() == 0) {
                                 textdispatchstatus.setText(pending);
                                 textdispatchstatus.setTextColor(getResources().getColor(R.color.colorAccent));
-                                dispatchstatus.setText(pending);
                                 framed.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                                dispatchstatus.setTextColor(Color.RED);
                             } else {
                                 framed.setBackgroundColor(getResources().getColor(R.color.hound));
                                 textdispatchstatus.setText(dispatched);
                                 textdispatchstatus.setTextColor(getResources().getColor(R.color.hound));
-                                dispatchstatus.setText(dispatched);
-                                dispatchstatus.setTextColor(getResources().getColor(R.color.hound));
                             }
                             Log.d("response from api", me.getName());
                             String dispatchtime;

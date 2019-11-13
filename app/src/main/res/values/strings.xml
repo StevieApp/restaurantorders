@@ -73,4 +73,7 @@
     <string name="delivery_details">Delivery Details:</string>
     <string name="accept">Accept</string>
     <string name="new_orders">New Orders</string>
+    <string name="payment_details">Payment Details:</string>
+    <string name="dispatched">DISPATCHED</string>
+    <string name="email">Email</string>
 </resources>

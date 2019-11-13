@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="290dp"
-    android:layout_height="160dp"
+    android:layout_height="180dp"
     android:layout_margin="6dp"
     android:elevation="90dp"
     android:orientation="vertical"
@@ -36,6 +36,7 @@
                 android:gravity="center"
                 android:text="@string/productname"
                 android:textSize="25sp"
+                android:fontFamily="sans-serif-black"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:fontFamily="sans-serif-black"
                 android:text="@string/accompaniment"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -61,6 +63,7 @@
                 android:layout_weight=".5"
                 android:text="@string/accompany"
                 android:textSize="18sp"
+                android:fontFamily="sans-serif-condensed-light"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -76,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
                 android:text="@string/item" />
 
             <TextView
@@ -83,7 +87,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="@string/itemnumber" />
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="@string/itemnumber"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -97,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:fontFamily="sans-serif-black"
                 android:textStyle="bold"
                 android:text="@string/product_attribute" />
 
@@ -105,7 +112,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="@string/attribute" />
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="@string/attribute"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -120,6 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
                 android:text="@string/quantity" />
 
             <TextView
@@ -127,6 +137,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textSize="16sp"
                 android:text="@string/item_quantity" />
 
         </LinearLayout>
@@ -142,6 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
                 android:text="@string/item_price" />
 
             <TextView
@@ -149,6 +162,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textSize="16sp"
                 android:text="@string/itempricing" />
 
         </LinearLayout>
@@ -164,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
                 android:text="@string/description" />
 
             <TextView
@@ -171,6 +187,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textSize="16sp"
                 android:text="@string/itemdescription" />
 
         </LinearLayout>
