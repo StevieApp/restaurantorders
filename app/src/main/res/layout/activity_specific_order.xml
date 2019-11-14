@@ -10,7 +10,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttoncanceldispatch"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="-5dp"
         android:layout_marginEnd="-5dp"
@@ -21,9 +21,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttondispatch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
         android:layout_marginStart="-5dp"
         android:layout_marginEnd="-5dp"
         android:backgroundTint="@android:color/holo_green_dark"
@@ -107,18 +106,15 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginEnd="7dp"
                             android:backgroundTint="@color/colorAccent"
                             android:orientation="horizontal"
-                            app:cardCornerRadius="20dp">
+                            app:cardCornerRadius="10dp">
 
 
                             <TextView
                                 android:id="@+id/orderstatus"
-                                android:layout_width="match_parent"
+                                android:layout_width="fill_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".5"
                                 android:gravity="center"
                                 android:text="@string/Pending"
                                 android:textColor="@android:color/white"
@@ -131,21 +127,19 @@
                             android:layout_height="wrap_content"
                             android:layout_width="100dp"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginEnd="7dp"
                             android:backgroundTint="@color/hound"
                             android:orientation="horizontal"
-                            app:cardCornerRadius="20dp">
+                            app:cardCornerRadius="10dp">
 
 
                             <TextView
                                 android:id="@+id/orderstatusd"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight=".5"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="@string/dispatched"
                                 android:textColor="@android:color/white"
+                                android:textSize="14sp"
                                 android:textStyle="bold" />
 
                         </androidx.cardview.widget.CardView>
@@ -185,6 +179,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
                 android:padding="5dp">
 
                 <LinearLayout
@@ -204,7 +199,7 @@
                             android:layout_gravity="center"
                             android:layout_marginBottom="3dp"
                             android:text="@string/delivery_details"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="22sp"
                             android:textStyle="bold" />
 
@@ -367,7 +362,7 @@
                             android:layout_gravity="center"
                             android:layout_marginBottom="3dp"
                             android:text="@string/payment_details"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="22sp"
                             android:textStyle="bold" />
 
@@ -591,7 +586,7 @@
                             android:layout_gravity="center"
                             android:layout_marginBottom="3dp"
                             android:text="@string/cart"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="22sp"
                             android:textStyle="bold" />
 
