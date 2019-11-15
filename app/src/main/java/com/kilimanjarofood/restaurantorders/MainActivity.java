@@ -124,116 +124,122 @@ public class MainActivity extends AppCompatActivity {
         final Timer timer = new Timer();
         getAllOrders.clear();
         //Set the schedule function
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                startForeground(duration);
-                String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
-                RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        try {
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    startForeground(duration);
 
-                JsonObjectRequest objectRequest = new JsonObjectRequest(
-                        Request.Method.GET,
-                        url,
-                        null,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject jsonObject) {
-                                Log.e("response from api", jsonObject.toString());
-                                System.out.println(jsonObject.toString());
-                                Log.d("response from api", "onResponse: \n"
-                                        + jsonObject.toString());
-                                try {
-                                    JSONObject j = jsonObject.getJSONObject("data");
-                                    Log.d("response from api", j.toString());
-                                    JSONArray rr = j.getJSONArray("orders");
-                                    Log.d("response from api", rr.toString());
-                                    Gson json = new Gson();
-                                    Type types = new TypeToken<ArrayList<Order>>() {
-                                    }.getType();
-                                    ArrayList<Order> orders = json.fromJson(rr.toString(), types);
-                                    getAllOrders.clear();
-                                    getAllOrders.addAll(orders);
-                                    
-                                    for (int g = 0; g < getAllOrders.size(); g++) {
-                                        nou.add(String.valueOf(getAllOrders.get(g).getId()));
-                                    }
+                    String url = "https://kilimanjarofood.co.ke/api/v1/dispatch/orders";
+                    RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
-                                    if (pref.getString("size", null) == null) {
-                                        editor.putString("size", String.valueOf(0));
-                                        editor.putString("newsize", String.valueOf(0));
-                                        editor.commit();
-                                    }
+                    JsonObjectRequest objectRequest = new JsonObjectRequest(
+                            Request.Method.GET,
+                            url,
+                            null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject jsonObject) {
+                                    Log.e("response from api", jsonObject.toString());
+                                    System.out.println(jsonObject.toString());
+                                    Log.d("response from api", "onResponse: \n"
+                                            + jsonObject.toString());
+                                    try {
+                                        JSONObject j = jsonObject.getJSONObject("data");
+                                        Log.d("response from api", j.toString());
+                                        JSONArray rr = j.getJSONArray("orders");
+                                        Log.d("response from api", rr.toString());
+                                        Gson json = new Gson();
+                                        Type types = new TypeToken<ArrayList<Order>>() {
+                                        }.getType();
+                                        ArrayList<Order> orders = json.fromJson(rr.toString(), types);
+                                        getAllOrders.clear();
+                                        getAllOrders.addAll(orders);
 
-                                    if (Integer.parseInt(pref.getString("size", null)) > 0
-                                            && nou.size() != 0) {
-                                        editor.putString("newsize", String.valueOf(nou.size()));
-                                        editor.commit();
-                                        if (Integer.parseInt(pref.getString("size", null))
-                                                < nou.size()) {
-                                            Intent intent = new Intent(MainActivity.this,
-                                                    Viewing.class);
-
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            PendingIntent pendingIntent = PendingIntent
-                                                    .getActivity(MainActivity.this,
-                                                            0, intent, 0);
-
-                                            NotificationCompat.Builder builder = new NotificationCompat
-                                                    .Builder(MainActivity.this, CHANNEL_ID)
-                                                    .setSmallIcon(R.mipmap.chicken)
-                                                    .setColor(getResources().getColor(R.color.hound))
-                                                    .setContentTitle("New Order(s): " + (nou.size()
-                                                            - Integer.parseInt(pref
-                                                            .getString("size", null))))
-                                                    .setStyle(new NotificationCompat.BigPictureStyle()
-                                                            .bigPicture(bee).bigLargeIcon(bee).setBigContentTitle("Kilimanjaro Food")
-                                                            .setSummaryText("New Order Received!"))
-                                                    .setContentText("Needs attention!!!")
-                                                    .setStyle(new NotificationCompat.BigTextStyle()
-                                                            .bigText("Needs attention!!!"))
-                                                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                                                    .setContentIntent(pendingIntent)
-                                                    .setLargeIcon(bee)
-                                                    .setAutoCancel(true);
-
-                                            Notification note = builder.build();
-                                            note.defaults |= Notification.DEFAULT_VIBRATE;
-                                            note.defaults |= Notification.DEFAULT_SOUND;
-
-                                            NotificationManagerCompat notificationManager =
-                                                    NotificationManagerCompat.from(MainActivity.this);
-                                            // notificationId is a unique int for each notification that you must define
-                                            notificationManager.notify(NOTIF_ID, note);
+                                        for (int g = 0; g < getAllOrders.size(); g++) {
+                                            nou.add(String.valueOf(getAllOrders.get(g).getId()));
                                         }
-                                    } else if (nou.size() != 0) {
-                                        editor.putString("size", String.valueOf(nou.size()));
-                                        editor.commit();
-                                    } else {
-                                        Calendar cal = Calendar.getInstance();
-                                        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                                        //alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 30*1000, pendingIntent);
-                                    }
 
-                                } catch (JSONException e) {
-                                    Log.d("response from api", "paaaapiiii");
-                                    e.printStackTrace();
+                                        if (pref.getString("size", null) == null) {
+                                            editor.putString("size", String.valueOf(0));
+                                            editor.putString("newsize", String.valueOf(0));
+                                            editor.commit();
+                                        }
+
+                                        if (Integer.parseInt(pref.getString("size", null)) > 0
+                                                && nou.size() != 0) {
+                                            editor.putString("newsize", String.valueOf(nou.size()));
+                                            editor.commit();
+                                            if (Integer.parseInt(pref.getString("size", null))
+                                                    < nou.size()) {
+                                                Intent intent = new Intent(MainActivity.this,
+                                                        Viewing.class);
+
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                PendingIntent pendingIntent = PendingIntent
+                                                        .getActivity(MainActivity.this,
+                                                                0, intent, 0);
+
+                                                NotificationCompat.Builder builder = new NotificationCompat
+                                                        .Builder(MainActivity.this, CHANNEL_ID)
+                                                        .setSmallIcon(R.mipmap.chicken)
+                                                        .setColor(getResources().getColor(R.color.hound))
+                                                        .setContentTitle("New Order(s): " + (nou.size()
+                                                                - Integer.parseInt(pref
+                                                                .getString("size", null))))
+                                                        .setStyle(new NotificationCompat.BigPictureStyle()
+                                                                .bigPicture(bee).bigLargeIcon(bee).setBigContentTitle("Kilimanjaro Food")
+                                                                .setSummaryText("New Order Received!"))
+                                                        .setContentText("Needs attention!!!")
+                                                        .setStyle(new NotificationCompat.BigTextStyle()
+                                                                .bigText("Needs attention!!!"))
+                                                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                                        .setContentIntent(pendingIntent)
+                                                        .setLargeIcon(bee)
+                                                        .setAutoCancel(true);
+
+                                                Notification note = builder.build();
+                                                note.defaults |= Notification.DEFAULT_VIBRATE;
+                                                note.defaults |= Notification.DEFAULT_SOUND;
+
+                                                NotificationManagerCompat notificationManager =
+                                                        NotificationManagerCompat.from(MainActivity.this);
+                                                // notificationId is a unique int for each notification that you must define
+                                                notificationManager.notify(NOTIF_ID, note);
+                                            }
+                                        } else if (nou.size() != 0) {
+                                            editor.putString("size", String.valueOf(nou.size()));
+                                            editor.commit();
+                                        } else {
+                                            Calendar cal = Calendar.getInstance();
+                                            AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                                            //alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 30*1000, pendingIntent);
+                                        }
+
+                                    } catch (JSONException e) {
+                                        Log.d("response from api", "paaaapiiii");
+                                        e.printStackTrace();
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError volleyError) {
+                                    Log.e("error from api", volleyError.toString());
+                                    System.out.println(volleyError.toString());
+                                    Log.d("error from api", "onErrorResponse: \n"
+                                            + volleyError.toString());
                                 }
                             }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError volleyError) {
-                                Log.e("error from api", volleyError.toString());
-                                System.out.println(volleyError.toString());
-                                Log.d("error from api", "onErrorResponse: \n"
-                                        + volleyError.toString());
-                            }
-                        }
-                );
-                requestQueue.add(objectRequest);
-            }
-        }, 30000, (long) pInfiniteDouble);
+                    );
+                    requestQueue.add(objectRequest);
+                }
+            }, 30000, (long) pInfiniteDouble);
+        } catch (Exception e) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void createNotificationChannel() {
