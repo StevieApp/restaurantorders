@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1056261957538",
+    "firebase_url": "https://kilimanjarorestaurantorders.firebaseio.com",
+    "project_id": "kilimanjarorestaurantorders",
+    "storage_bucket": "kilimanjarorestaurantorders.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056261957538:android:ee81f49d445698dbaaf4fb",
+        "android_client_info": {
+          "package_name": "com.kilimanjarofood.restaurantorders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056261957538-qeb5fq8mut0p9v8p3hj4f3fnbpemsc74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kilimanjarofood.restaurantorders",
+            "certificate_hash": "937a1c55c8f10cd442b520b61e2aa988469b611c"
+          }
+        },
+        {
+          "client_id": "1056261957538-l6sds7lmhhc6tkqanvra78s12ccf967k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgLTOC0aDE6JThxjYSxzQfK4fyOx3LUtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056261957538-l6sds7lmhhc6tkqanvra78s12ccf967k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

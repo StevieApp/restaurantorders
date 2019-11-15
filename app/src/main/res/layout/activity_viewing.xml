@@ -17,9 +17,10 @@
     <RelativeLayout
         android:id="@+id/rel"
         android:layout_width="wrap_content"
-        android:layout_height="480dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:focusable="true"
+        android:padding="45dp"
         android:layout_marginEnd="20dp"
         android:visibility="visible">
 
@@ -32,28 +33,23 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/juu"
                 android:elevation="30dp"
+                android:layout_gravity="center"
                 app:cardCornerRadius="15dp">
 
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="15dp"
-                    android:src="@drawable/chicken"
-                    app:civ_border_color="#FF000000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/neworder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
                         android:layout_marginTop="20dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary"
                         android:layout_weight=".7"
                         android:text="@string/new_orders"
                         android:textSize="30sp"
@@ -61,17 +57,32 @@
 
                     </TextView>
 
-                    <Button
-                        android:id="@+id/lim"
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="5dp"
-                        android:backgroundTint="@color/hound"
-                        android:gravity="center"
-                        android:text="@string/accept">
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="15dp"
+                        android:src="@drawable/ceh"
+                        app:civ_border_color="#FF000000" />
 
-                    </Button>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/lim"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:backgroundTint="@color/hound"
+                            android:gravity="center"
+                            android:text="@string/accept">
+
+                        </Button>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

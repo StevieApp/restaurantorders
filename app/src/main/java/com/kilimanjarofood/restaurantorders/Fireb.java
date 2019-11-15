@@ -44,7 +44,7 @@ public class Fireb extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
                 "notif")
                 .setContentTitle(title)
-                .setSmallIcon(R.drawable.chicken)
+                .setSmallIcon(R.drawable.c)
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(bee).bigLargeIcon(bee).setBigContentTitle("Kilimanjaro Food")
                         .setSummaryText("New Order Received!"))

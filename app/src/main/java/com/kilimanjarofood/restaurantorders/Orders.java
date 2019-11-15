@@ -1,6 +1,7 @@
 package com.kilimanjarofood.restaurantorders;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -117,8 +118,13 @@ public class Orders extends Fragment {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
-                        Toast.makeText(getContext(), "Unable to load orders",
-                                Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(getContext(), "Unable to load orders",
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }
                         progress.hide();
                     }
                 });

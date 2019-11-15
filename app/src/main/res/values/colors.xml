@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#693232</color>
-    <color name="colorPrimaryDark">#940D01</color>
-    <color name="colorAccent">#BB0404</color>
-    <color name="hound">#5BAD5C</color>
+    <color name="colorPrimary">#008074</color>
+    <color name="colorPrimaryDark">#00554C</color>
+    <color name="colorAccent">#702222</color>
+    <color name="colorA">#003A32</color>
+    <color name="hound">#008074</color>
     <color name="juu">#F7D9AD</color>
 </resources>
