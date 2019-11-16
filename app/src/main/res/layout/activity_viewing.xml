@@ -94,8 +94,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@android:color/white"
         android:layout_marginBottom="1dp"
-        android:background="@android:color/darker_gray"
+        android:elevation="90dp"
         android:textAlignment="gravity"
         app:menu="@menu/bottom_nav" />
 
