@@ -202,8 +202,7 @@
                             android:layout_marginBottom="3dp"
                             android:text="@string/cart"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                            android:textSize="22sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -219,9 +218,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerviews"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        </androidx.recyclerview.widget.RecyclerView>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -238,8 +235,7 @@
                             android:layout_marginBottom="3dp"
                             android:text="@string/delivery_details"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                            android:textSize="22sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -293,7 +289,6 @@
                                 android:id="@+id/textcreatedate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/createdat"
                                 android:textColor="@color/colorPrimary"
@@ -304,7 +299,6 @@
                                 android:id="@+id/textcreateddate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/createdattime"
                                 android:textSize="16sp" />
@@ -323,7 +317,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/deliverycontact"
                                 android:textColor="@color/colorPrimary"
@@ -334,7 +327,6 @@
                                 android:id="@+id/textdeliverynumber"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/deliverynumber"
                                 android:textSize="16sp" />
@@ -360,7 +352,6 @@
                                 android:id="@+id/dispatchedstatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/dispatch_status"
                                 android:textColor="@color/colorPrimary"
@@ -371,7 +362,6 @@
                                 android:id="@+id/textdispatchstatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/dispatchstatus"
                                 android:textSize="16sp" />
@@ -390,7 +380,6 @@
                                 android:id="@+id/textdispatch"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/dispatch_date"
                                 android:textColor="@color/colorPrimary"
@@ -401,7 +390,6 @@
                                 android:id="@+id/textdispatchdate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/dispatch_time"
                                 android:textSize="16sp" />
@@ -423,8 +411,7 @@
                             android:layout_marginBottom="3dp"
                             android:text="@string/payment_details"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                            android:textSize="22sp" />
 
                         <View
                             android:layout_width="match_parent"
@@ -479,7 +466,6 @@
                                 android:id="@+id/textpaymenttype"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/paymenttype"
                                 android:textColor="@color/colorPrimary"
@@ -490,7 +476,6 @@
                                 android:id="@+id/textpaytype"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/paytype"
                                 android:textSize="16sp" />
@@ -509,7 +494,6 @@
                                 android:id="@+id/textpaymentamt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/paidamount"
                                 android:textColor="@color/colorPrimary"
@@ -520,7 +504,6 @@
                                 android:id="@+id/textpayamt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/amount"
                                 android:textSize="16sp" />
@@ -546,7 +529,6 @@
                                 android:id="@+id/textpay"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/paymentstatus"
                                 android:textColor="@color/colorPrimary"
@@ -557,7 +539,6 @@
                                 android:id="@+id/textpaystatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/paidstatus"
                                 android:textSize="16sp" />
@@ -576,7 +557,6 @@
                                 android:id="@+id/textpayableamount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/payableamount"
                                 android:textColor="@color/colorPrimary"
@@ -587,7 +567,6 @@
                                 android:id="@+id/textpayableamt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/payableamt"
                                 android:textSize="16sp" />
@@ -614,7 +593,6 @@
                                 android:id="@+id/textpayreference"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".6"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/payment_reference"
                                 android:textColor="@color/colorPrimary"
@@ -625,7 +603,6 @@
                                 android:id="@+id/textpayref"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight=".4"
                                 android:fontFamily="sans-serif-condensed-light"
                                 android:text="@string/payref"
                                 android:textSize="16sp" />

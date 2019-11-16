@@ -2,12 +2,12 @@ package com.kilimanjarofood.restaurantorders;
 
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +38,11 @@ import java.util.Objects;
 public class DispatchedOrders extends Fragment {
 
     private ArrayList<Order> orderss = new ArrayList<>();
-    private TextView availability;
-    ProgressDialog progress;
+    private TextView nothing,
+            nothin;
+    private ScrollView availability,
+            avail;
+    private ProgressDialog progress;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,9 @@ public class DispatchedOrders extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(this.getContext()));
 
         availability = Objects.requireNonNull(getView()).findViewById(R.id.availability);
+        avail = Objects.requireNonNull(getView()).findViewById(R.id.avail);
+        nothing = Objects.requireNonNull(getView()).findViewById(R.id.nothing);
+        nothin = Objects.requireNonNull(getView()).findViewById(R.id.nothin);
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -106,6 +112,7 @@ public class DispatchedOrders extends Fragment {
                             }
                             if (orderss.size() == 0) {
                                 availability.setVisibility(getView().VISIBLE);
+                                nothing.setText("There are no dispatched orders!");
                             }
                             progress.hide();
                         } catch (JSONException e) {
@@ -125,13 +132,8 @@ public class DispatchedOrders extends Fragment {
                         System.out.println(volleyError.toString());
                         Log.d("error from api", "onErrorResponse: \n"
                                 + volleyError.toString());
-                        try {
-                            Toast.makeText(getContext(), "Unable to load orders",
-                                    Toast.LENGTH_SHORT).show();
-                        } catch (Exception e) {
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                        }
+                        avail.setVisibility(getView().VISIBLE);
+                        nothin.setText("Unable to load orders😥");
                         progress.hide();
                     }
                 });

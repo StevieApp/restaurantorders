@@ -60,9 +60,9 @@
     <string name="prodid">prodid</string>
     <string name="accompaniment_id">Accompaniment ID</string>
     <string name="accompanimentid">accompanimentid</string>
-    <string name="no_dispatched_orders">No Dispatched Orders</string>
-    <string name="no_orders_availabile">No Orders Availabile</string>
-    <string name="no_pending_orders">No Pending Orders</string>
+    <string name="no_dispatched_orders">There Are No Dispatched Orders!</string>
+    <string name="no_orders_availabile">There Are No Orders Available!</string>
+    <string name="no_pending_orders">There are no Pending Orders!</string>
     <string name="product_attribute">Product Attribute:</string>
     <string name="attribute">attribute</string>
     <string name="order_total">Order Total:</string>
@@ -76,4 +76,5 @@
     <string name="payment_details">Payment Details:</string>
     <string name="dispatched">DISPATCHED</string>
     <string name="email">Email</string>
+    <string name="no_orders">There are no Orders</string>
 </resources>

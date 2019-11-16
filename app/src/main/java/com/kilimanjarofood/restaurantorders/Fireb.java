@@ -16,6 +16,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 
 public class Fireb extends FirebaseMessagingService {
 
@@ -25,7 +26,7 @@ public class Fireb extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        notifier(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+        notifier(Objects.requireNonNull(remoteMessage.getNotification()).getTitle(), remoteMessage.getNotification().getBody());
     }
 
     public void notifier(String title, String message) {
@@ -44,7 +45,7 @@ public class Fireb extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
                 "notif")
                 .setContentTitle(title)
-                .setSmallIcon(R.drawable.c)
+                .setSmallIcon(R.drawable.cu)
                 .setStyle(new NotificationCompat.BigPictureStyle()
                         .bigPicture(bee).bigLargeIcon(bee).setBigContentTitle("Kilimanjaro Food")
                         .setSummaryText("New Order Received!"))

@@ -5,30 +5,80 @@
     android:layout_height="match_parent"
     tools:context=".PendingOrders">
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/availability"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-        <TextView
-            android:id="@+id/availability"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/no_pending_orders"
-            android:visibility="gone">
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        </TextView>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerviews"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+                android:layout_height="152dp"
+                android:layout_gravity="center"
+                android:contentDescription="No Pending Orders"
+                android:src="@drawable/pingtree" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/nothing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="9dp"
+                android:gravity="center"
+                android:text="@string/no_pending_orders" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/avail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="190dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/no_pending_orders"
+                android:src="@drawable/un" />
+
+            <TextView
+                android:id="@+id/nothin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/no_pending_orders" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
 
 </FrameLayout>

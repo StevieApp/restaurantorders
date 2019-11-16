@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("notif", "notif", NotificationManager.IMPORTANCE_HIGH);
             NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+            Objects.requireNonNull(manager).createNotificationChannel(channel);
         }
     }
 
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
                                                 NotificationCompat.Builder builder = new NotificationCompat
                                                         .Builder(MainActivity.this, CHANNEL_ID)
-                                                        .setSmallIcon(R.mipmap.chicken)
+                                                        .setSmallIcon(R.drawable.cu)
                                                         .setColor(getResources().getColor(R.color.hound))
                                                         .setContentTitle("New Order(s): " + (nou.size()
                                                                 - Integer.parseInt(pref
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
         }
     }
 
