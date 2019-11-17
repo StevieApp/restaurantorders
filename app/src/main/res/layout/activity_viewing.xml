@@ -12,6 +12,18 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigator" />
 
+    <LinearLayout
+        android:id="@+id/oid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".3"
+        android:background="@android:color/black"
+        android:clickable="true"
+        android:elevation="200dp"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:visibility="visible" />
+
     <RelativeLayout
         android:id="@+id/rel"
         android:layout_width="wrap_content"
@@ -19,6 +31,7 @@
         android:layout_marginStart="20dp"
         android:focusable="true"
         android:padding="45dp"
+        android:elevation="205dp"
         android:layout_marginEnd="20dp"
         android:visibility="visible">
 
@@ -73,7 +86,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="12dp"
                             android:backgroundTint="@color/hound"
                             android:gravity="center"
                             android:text="@string/accept" />

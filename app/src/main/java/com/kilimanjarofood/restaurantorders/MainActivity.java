@@ -166,6 +166,11 @@ public class MainActivity extends AppCompatActivity {
                                             editor.commit();
                                         }
 
+                                        if (pref.getString("newsize", null) == null) {
+                                            editor.putString("newsize", String.valueOf(0));
+                                            editor.commit();
+                                        }
+
                                         if (Integer.parseInt(pref.getString("size", null)) > 0
                                                 && nou.size() != 0) {
                                             editor.putString("newsize", String.valueOf(nou.size()));

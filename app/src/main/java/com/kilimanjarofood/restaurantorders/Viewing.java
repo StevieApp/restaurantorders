@@ -185,6 +185,15 @@ public class Viewing extends AppCompatActivity {
                                 });
                             }
                         });
+                    } else if (Integer.parseInt(pref.getString("newsize", null)) ==
+                            Integer.parseInt(pref.getString("size", null))) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                rel.setVisibility(View.GONE);
+                                oid.setVisibility(View.GONE);
+                            }
+                        });
                     }
                     Log.d("ggggggggg", "gggggggggggg");
                 }
