@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class Viewing extends AppCompatActivity {
     int NOTIF_ID = 1;
     Timer timer;
     RelativeLayout rel;
+    LinearLayout oid;
     TextView neworder;
     Button lim;
 
@@ -132,6 +134,7 @@ public class Viewing extends AppCompatActivity {
     private void startForeground() {
         rel = findViewById(R.id.rel);
         neworder = findViewById(R.id.neworder);
+        oid = findViewById(R.id.oid);
         lim = findViewById(R.id.lim);
         timer = new Timer();
         //Set the schedule function
@@ -140,6 +143,13 @@ public class Viewing extends AppCompatActivity {
             public void run() {
                 startForeground();
                 if (pref.getString("newsize", null) != null) {
+
+                    if (Integer.parseInt(pref.getString("newsize", null)) <
+                            Integer.parseInt(pref.getString("size", null))) {
+                        editor.putString("size", pref.getString("newsize", null));
+                        editor.commit();
+                    }
+
                     if (Integer.parseInt(pref.getString("newsize", null)) >
                             Integer.parseInt(pref.getString("size", null))) {
                         final int g = Integer.parseInt(pref.getString("newsize", null)) -
@@ -148,18 +158,17 @@ public class Viewing extends AppCompatActivity {
                             @Override
                             public void run() {
                                 rel.setVisibility(View.VISIBLE);
+                                oid.setVisibility(View.VISIBLE);
                                 neworder.setText("New Orders: " + g);
                                 lim.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         Toast.makeText(Viewing.this, "Attending...",
                                                 Toast.LENGTH_LONG).show();
-                                        editor.putString("size", null);
                                         editor.putString("size", pref.getString("newsize", null));
                                         editor.commit();
-                                        editor.putString("newsize", null);
-                                        editor.commit();
                                         rel.setVisibility(View.GONE);
+                                        oid.setVisibility(View.GONE);
                                         BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
                                         bottom_nav.setOnNavigationItemSelectedListener(newListener);
                                         if (bottom_nav.getSelectedItemId() == R.id.allorders) {
@@ -189,6 +198,7 @@ public class Viewing extends AppCompatActivity {
         checkConnectivity();
 
         rel.setVisibility(View.GONE);
+        oid.setVisibility(View.GONE);
         BottomNavigationView bottom_nav = findViewById(R.id.bottom_navigator);
         bottom_nav.setOnNavigationItemSelectedListener(newListener);
         if (bottom_nav.getSelectedItemId() == R.id.allorders) {
